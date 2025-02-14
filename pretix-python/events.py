@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Optional
 
 from lang import Lang
+from utils import get_from_lang
 
 
 class Event:
@@ -18,10 +19,12 @@ class Event:
         self.location = location
         self.default_lang = default_lang
 
+    def __repr__(self):
+        return (f'Event(slug={self.slug}  name="{self.get_name()}"  date_from={self.date_from.isoformat()}  '
+                f'date_to={self.date_to.isoformat()})')
+
     def get_name(self, lang: Optional[Lang] = None) -> str:
-        lang = lang or self.default_lang
-        lang = lang or Lang.EN  # set english as fallback
-        return self.name[lang.value]
+        return get_from_lang(self.name, lang, self.default_lang)
 
 
 def next_saturday(start_point: Optional[datetime] = None) -> datetime:
@@ -44,6 +47,9 @@ class NewEventInfo:
         self.name = name
         self.date_from = date_from
         self.date_to = date_to
+
+    def __repr__(self):
+        return f'NewEventInfo(slug={self.slug}, name={self.name}, date_from={self.date_from}, date_to={self.date_to})'
 
     @staticmethod
     def from_user_input(name):

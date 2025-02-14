@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import json
 from datetime import datetime
 
 from client import Client
@@ -37,13 +38,19 @@ def main2():
     if not template_event:
         raise ValueError('Event not found')
 
-    info = NewEventInfo(
-        'cid-03-2025',
-        template_event.name,
-        date_from=datetime.fromisoformat('2025-03-22T11:00:00'),
-        date_to=datetime.fromisoformat('2025-03-22T13:00:00')
-    )
-    client.create_clone(info, template_event)
+    settings = client.get_event_products(template_event)
+    print(settings)
+
+    with open('data.json', 'w') as f:
+        json.dump(settings, f, indent=2)
+
+    # info = NewEventInfo(
+    #     'cid-03-2025',
+    #     template_event.name,
+    #     date_from=datetime.fromisoformat('2025-03-22T11:00:00'),
+    #     date_to=datetime.fromisoformat('2025-03-22T13:00:00')
+    # )
+    # client.create_clone(info, template_event)
 
 
 if __name__ == '__main__':

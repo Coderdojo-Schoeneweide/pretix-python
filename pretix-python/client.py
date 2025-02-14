@@ -1,13 +1,16 @@
 import enum
 import os
-from typing import List, Optional
+import sys
+from typing import List, Optional, Any, Dict, Union
 from urllib.parse import urljoin
 
+from dacite import from_dict
 from dotenv import load_dotenv
 import requests
 
 from events import Event, NewEventInfo
 from lang import Lang
+from products import Product
 
 DEFAULT_DOMAIN = 'https://pretix.eu/'
 
@@ -41,34 +44,55 @@ class Client:
         headers['Content-Type'] = 'application/json'
         return headers
 
-    def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
-        if num_pages == 0:
-            return []
+    def _get(self, endpoint, num_pages: int = -1) -> Union[List, Dict[str, Any]]:
+        if num_pages == -1:
+            num_pages = sys.maxsize
 
-        next_url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/')
+        next_url = urljoin(self.pretix_domain, endpoint)
 
-        counter = 0
-        events = []
-        while next_url is not None:
+        all_data = []
+        for i in range(num_pages):
             r = requests.get(next_url, headers=self._get_headers())
             r.raise_for_status()
             data = r.json()
 
-            next_url = data['next']
+            # handle pages
+            if 'next' in data and 'results' in data:
+                next_url = data['next']
 
-            for event_data in data['results']:
-                events.append(self._create_event(event_data))
+                if not isinstance(data['results'], list):
+                    raise TypeError('Found page response layout, but "results" is not a list.')
 
-            counter += 1
-            if num_pages != -1 and counter >= num_pages:
+                all_data.extend(data['results'])
+            else:
+                return data
+
+            if next_url is None:
                 break
+
+        return all_data
+
+    def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
+        event_data = self._get(f'/api/v1/organizers/{self.organizer}/events/', num_pages)
+        events = [self._create_event(e) for e in event_data]
 
         if sort_by == SortKey.Date:
             events.sort(key=lambda e: e.date_from)
 
         return events
 
-    def _create_event(self, event_data):
+    def get_event_settings(self, event):
+        url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{event.slug}/settings/')
+        r = requests.get(url, headers=self._get_headers())
+        r.raise_for_status()
+        return r.json()
+
+    def get_event_products(self, event: Event | str, num_pages: int = -1) -> List[Product]:
+        event = event.slug if isinstance(event, Event) else event
+        product_data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event}/items/', num_pages)
+        return [Product.from_dict(p) for p in product_data]
+
+    def _create_event(self, event_data) -> Event:
         event = Event(
             name=event_data['name'], slug=event_data['slug'], live=event_data['live'],
             date_from=event_data['date_from'], date_to=event_data['date_to'],
