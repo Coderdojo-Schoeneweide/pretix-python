@@ -23,7 +23,11 @@ def get_from_lang(data: Dict[str, str], lang: Lang, default_lang: Optional[Lang]
     lang = lang or Lang.EN  # set english as fallback
 
     # fallback to first language in name
-    if lang not in data:
+    if lang.value not in data:
         lang = Lang(list(data.keys())[0])
 
     return data[lang.value]
+
+
+def previous_weekday(dt, weekday: int) -> datetime.datetime:
+    return dt - datetime.timedelta(days=(dt.weekday() - weekday) % 7 + (7 if dt.weekday() == weekday else 0))

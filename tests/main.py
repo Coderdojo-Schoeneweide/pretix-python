@@ -5,6 +5,7 @@ from datetime import datetime
 from client import Client
 from events import NewEventInfo
 from lang import Lang
+from utils import previous_weekday
 
 
 def main():
@@ -38,19 +39,27 @@ def main2():
     if not template_event:
         raise ValueError('Event not found')
 
-    settings = client.get_event_products(template_event)
-    print(settings)
+    info = NewEventInfo(
+        'cid-03-2025',
+        template_event.name,
+        date_from=datetime.fromisoformat('2025-03-22T11:00:00'),
+        date_to=datetime.fromisoformat('2025-03-22T13:00:00')
+    )
+    new_event = client.clone_event(info, template_event)
+    products = client.get_event_products(new_event)
+    latecomer_ticket = next(p for p in products if 'atecomer' in p.get_name(Lang.EN))
+    wednesday_before = previous_weekday(info.date_from, 2)
+    client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
 
-    with open('data.json', 'w') as f:
-        json.dump(settings, f, indent=2)
 
-    # info = NewEventInfo(
-    #     'cid-03-2025',
-    #     template_event.name,
-    #     date_from=datetime.fromisoformat('2025-03-22T11:00:00'),
-    #     date_to=datetime.fromisoformat('2025-03-22T13:00:00')
-    # )
-    # client.create_clone(info, template_event)
+def main3():
+    client = Client.from_env('dojosw', default_lang=Lang.DE)
+    events = client.get_events()
+    generated_event = events[-1]
+    print(generated_event)
+    products = client.get_event_products(generated_event)
+    for p in products:
+        print(p.get_name(Lang.EN))
 
 
 if __name__ == '__main__':
