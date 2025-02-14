@@ -39,7 +39,7 @@ class Client:
             "Authorization": f'Token {self.token}',
         }
 
-    def _get_post_headers(self):
+    def _post_headers(self):
         headers = self._get_headers()
         headers['Content-Type'] = 'application/json'
         return headers
@@ -72,6 +72,13 @@ class Client:
 
         return all_data
 
+    def _patch(self, endpoint: str, data: Dict[str, Any]):
+        url = urljoin(self.pretix_domain, endpoint)
+        r = requests.patch(url, headers=self._post_headers(), json=data)
+        r.raise_for_status()
+        return True
+
+    # events
     def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
         event_data = self._get(f'/api/v1/organizers/{self.organizer}/events/', num_pages)
         events = [self._create_event(e) for e in event_data]
@@ -81,17 +88,6 @@ class Client:
 
         return events
 
-    def get_event_settings(self, event):
-        url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{event.slug}/settings/')
-        r = requests.get(url, headers=self._get_headers())
-        r.raise_for_status()
-        return r.json()
-
-    def get_event_products(self, event: Event | str, num_pages: int = -1) -> List[Product]:
-        event = event.slug if isinstance(event, Event) else event
-        product_data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event}/items/', num_pages)
-        return [Product.from_dict(p) for p in product_data]
-
     def _create_event(self, event_data) -> Event:
         event = Event(
             name=event_data['name'], slug=event_data['slug'], live=event_data['live'],
@@ -100,8 +96,25 @@ class Client:
         )
         return event
 
-    def create_clone(self, info: NewEventInfo, template: Event) -> Event:
+    def clone_event(self, info: NewEventInfo, template: Event) -> Event:
         url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{template.slug}/clone/')
-        r = requests.post(url, headers=self._get_post_headers(), json=info.to_data())
+        r = requests.post(url, headers=self._post_headers(), json=info.to_data())
         r.raise_for_status()
         return self._create_event(r.json())
+
+    def get_event_settings(self, event):
+        url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{event.slug}/settings/')
+        r = requests.get(url, headers=self._get_headers())
+        r.raise_for_status()
+        return r.json()
+
+    # products
+    def get_event_products(self, event: Event | str, num_pages: int = -1) -> List[Product]:
+        event = event.slug if isinstance(event, Event) else event
+        product_data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event}/items/', num_pages)
+        return [Product.from_dict(p) for p in product_data]
+
+    def patch_product(self, event: Event | str, product: Product | int, patch_data: Dict[str, Any]):
+        event = event.slug if isinstance(event, Event) else event
+        product = product.id if isinstance(product, Product) else product
+        self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/items/{product}/', patch_data)

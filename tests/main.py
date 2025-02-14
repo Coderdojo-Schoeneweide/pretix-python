@@ -25,7 +25,7 @@ def main():
         print("Event not found")
 
     info = NewEventInfo.from_user_input(template_event.name)
-    client.create_clone(info, template_event)
+    client.clone_event(info, template_event)
 
 
 def main2():
