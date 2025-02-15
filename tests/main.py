@@ -48,6 +48,7 @@ def main2():
     products = client.get_event_products(new_event)
     latecomer_ticket = next(p for p in products if 'atecomer' in p.get_name(Lang.EN))
     wednesday_before = previous_weekday(info.date_from, 2)
+    wednesday_before.replace(hour=1)  # at 1 am
     client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
 
 
