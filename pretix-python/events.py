@@ -83,30 +83,3 @@ class NewEventInfo:
             'live': False,
             'testmode': False,
         }
-
-'''
-    {
-        "name": {"en": "Sample Conference"},
-        "currency": "EUR",
-        "date_from": "2017-12-27T10:00:00Z",
-        "date_admission": null,
-        "is_public": false,
-        "presale_start": null,
-        "presale_end": null,
-        "location": null,
-        "geo_lat": null,
-        "geo_lon": null,
-        "seating_plan": null,
-        "seat_category_mapping": {},
-        "has_subevents": false,
-        "meta_data": {},
-        "timezone": "Europe/Berlin",
-        "item_meta_properties": {},
-        "plugins": [
-            "pretix.plugins.stripe",
-            "pretix.plugins.paypal"
-        ],
-        "all_sales_channels": true,
-        "limit_sales_channels": []
-    }
-'''

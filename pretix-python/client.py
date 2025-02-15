@@ -4,7 +4,6 @@ import sys
 from typing import List, Optional, Any, Dict, Union
 from urllib.parse import urljoin
 
-from dacite import from_dict
 from dotenv import load_dotenv
 import requests
 
