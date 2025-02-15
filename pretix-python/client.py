@@ -97,7 +97,11 @@ class Client:
 
     def clone_event(self, info: NewEventInfo, template: Event) -> Event:
         url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{template.slug}/clone/')
-        r = requests.post(url, headers=self._post_headers(), json=info.to_data())
+
+        data = info.to_data()
+        if 'location' not in data:
+            data['location'] = template.location
+        r = requests.post(url, headers=self._post_headers(), json=data)
         r.raise_for_status()
         return self._create_event(r.json())
 

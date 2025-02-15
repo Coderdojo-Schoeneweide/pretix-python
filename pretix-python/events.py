@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 
 from lang import Lang
 from utils import get_from_lang
@@ -74,7 +74,7 @@ class NewEventInfo:
 
         return NewEventInfo(slug, name, date_from, date_to)
 
-    def to_data(self) -> Dict[str, str]:
+    def to_data(self) -> Dict[str, Any]:
         return {
             'slug': self.slug,
             'name': self.name,
