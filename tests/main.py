@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import json
 from datetime import datetime
 
 from client import Client
+from descriptions import DescriptionLoader
 from events import NewEventInfo
 from lang import Lang
 from utils import previous_weekday
@@ -36,5 +38,11 @@ def main():
     client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
 
 
+def main2():
+    loader = DescriptionLoader.from_dir()
+    client = Client.from_env('dojosw', default_lang=Lang.DE)
+    result = client.patch_event_settings('cid-03-2025', {'frontpage_text': loader.descriptions['cid']})
+
+
 if __name__ == '__main__':
-    main()
+    main2()

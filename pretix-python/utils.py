@@ -29,5 +29,5 @@ def get_from_lang(data: Dict[str, str], lang: Lang, default_lang: Optional[Lang]
     return data[str(lang.value)]
 
 
-def previous_weekday(dt, weekday: int) -> datetime.datetime:
+def previous_weekday(dt: datetime.datetime, weekday: int) -> datetime.datetime:
     return dt - datetime.timedelta(days=(dt.weekday() - weekday) % 7 + (7 if dt.weekday() == weekday else 0))

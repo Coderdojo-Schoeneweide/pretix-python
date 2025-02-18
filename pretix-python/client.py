@@ -1,7 +1,7 @@
 import enum
 import os
 import sys
-from typing import List, Optional, Any, Dict, Union
+from typing import List, Optional, Any, Dict, Union, Tuple
 from urllib.parse import urljoin
 
 from dotenv import load_dotenv
@@ -71,11 +71,15 @@ class Client:
 
         return all_data
 
-    def _patch(self, endpoint: str, data: Dict[str, Any]):
+    def _patch(self, endpoint: str, data: Dict[str, Any]) -> Tuple[int, Any]:
         url = urljoin(self.pretix_domain, endpoint)
         r = requests.patch(url, headers=self._post_headers(), json=data)
         r.raise_for_status()
-        return True
+        try:
+            data = r.json()
+        except ValueError:
+            data = None
+        return r.status_code, data
 
     # events
     def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
@@ -86,6 +90,17 @@ class Client:
             events.sort(key=lambda e: e.date_from)
 
         return events
+
+    def get_event_settings(self, event_slug: Union[str, Event], num_pages: int = -1) -> Dict[str, Any]:
+        if isinstance(event_slug, Event):
+            event_slug = event_slug.slug
+        event_data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings', num_pages)
+        return event_data
+
+    def patch_event_settings(self, event_slug: Union[str, Event], patch_data: Dict[str, Any]):
+        if isinstance(event_slug, Event):
+            event_slug = event_slug.slug
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings/', patch_data)
 
     def _create_event(self, event_data) -> Event:
         event = Event(
@@ -105,12 +120,6 @@ class Client:
         r.raise_for_status()
         return self._create_event(r.json())
 
-    def get_event_settings(self, event):
-        url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{event.slug}/settings/')
-        r = requests.get(url, headers=self._get_headers())
-        r.raise_for_status()
-        return r.json()
-
     # products
     def get_event_products(self, event: Event | str, num_pages: int = -1) -> List[Product]:
         event = event.slug if isinstance(event, Event) else event
@@ -120,4 +129,4 @@ class Client:
     def patch_product(self, event: Event | str, product: Product | int, patch_data: Dict[str, Any]):
         event = event.slug if isinstance(event, Event) else event
         product = product.id if isinstance(product, Product) else product
-        self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/items/{product}/', patch_data)
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/items/{product}/', patch_data)
