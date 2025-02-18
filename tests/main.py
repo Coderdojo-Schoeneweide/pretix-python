@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-import json
-from datetime import datetime
-
 from client import Client
 from descriptions import DescriptionLoader
 from events import NewEventInfo
