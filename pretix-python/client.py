@@ -94,13 +94,19 @@ class Client:
 
     def _post(self, endpoint: str, data: Dict[str, Any]) -> Tuple[int, Any]:
         url = urljoin(self.pretix_domain, endpoint)
-        r = requests.post(url, headers=self._post_headers(), json=data)
-        r.raise_for_status()
-        try:
-            response_data = r.json()
-        except ValueError:
-            response_data = None
-        return r.status_code, response_data
+        if self.read_only:
+            print('dry post {url}:')
+            for key, value in data.items():
+                print(f'  {key}: {value}')
+            return 0, None
+        else:
+            r = requests.post(url, headers=self._post_headers(), json=data)
+            r.raise_for_status()
+            try:
+                response_data = r.json()
+            except ValueError:
+                response_data = None
+            return r.status_code, response_data
 
     # events
     def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
