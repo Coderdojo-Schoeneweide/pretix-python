@@ -36,9 +36,9 @@ def main():
 
 
 def main2():
-    loader = DescriptionLoader.from_dir()
+    description_loader = DescriptionLoader.from_dir()
     client = Client.from_env('dojosw', default_lang=Lang.DE)
-    result = client.patch_event_settings('cid-03-2025', {'frontpage_text': loader.descriptions['cid']})
+    result = client.patch_event_settings('cid-03-2025', {'frontpage_text': description_loader.descriptions['cid']})
 
 
 if __name__ == '__main__':

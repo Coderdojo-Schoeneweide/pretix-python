@@ -1,3 +1,4 @@
 python-dotenv
 requests
 dacite
+simple-term-menu

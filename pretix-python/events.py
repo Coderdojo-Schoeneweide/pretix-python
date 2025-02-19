@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Optional, Any
 
 from lang import Lang
-from utils import get_from_lang
+from utils import get_from_lang, user_choose_date
 
 
 class Event:
@@ -59,18 +59,20 @@ class NewEventInfo:
         slug = input('slug: ')
 
         # date from
-        next_sat = next_saturday()
-        next_next_sat = next_saturday(next_sat)
-        print('\nexamples:')
-        print(next_sat.isoformat())
-        print(next_next_sat.isoformat())
-        date_from = input('date_from: ')
-        date_from = datetime.fromisoformat(date_from)
+        date_options = []
+        next_sat = None
+        for _ in range(5):
+            next_sat = next_saturday(next_sat)
+            date_options.append(next_sat)
 
-        possible_date_to = date_from + timedelta(hours=2)
-        print('example: {}'.format(possible_date_to.isoformat()))
-        date_to = input('date_to: ')
-        date_to = datetime.fromisoformat(date_to)
+        date_from = user_choose_date(date_options, 'choose start time')
+
+        date_to_options = [
+            date_from + timedelta(hours=2),
+            date_from + timedelta(hours=2, minutes=30),
+            date_from + timedelta(hours=3),
+        ]
+        date_to = user_choose_date(date_to_options, 'choose end time')
 
         return NewEventInfo(slug, name, date_from, date_to)
 
