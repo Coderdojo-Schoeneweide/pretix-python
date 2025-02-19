@@ -20,17 +20,22 @@ class SortKey(enum.Enum):
 
 class Client:
     def __init__(
-            self, token: str, organizer: str, default_lang: Optional[Lang] = None, pretix_domain: str = DEFAULT_DOMAIN
+            self, token: str, organizer: str, default_lang: Optional[Lang] = None, pretix_domain: str = DEFAULT_DOMAIN,
+            read_only: bool = False
     ):
         self.token = token
         self.organizer = organizer
         self.pretix_domain = pretix_domain
         self.default_lang = default_lang
+        self.read_only = read_only
 
     @staticmethod
-    def from_env(organizer: str, default_lang: Optional[Lang] = None, pretix_domain: str = DEFAULT_DOMAIN):
+    def from_env(
+            organizer: str, default_lang: Optional[Lang] = None, pretix_domain: str = DEFAULT_DOMAIN,
+            read_only: bool = False,
+    ):
         load_dotenv()
-        return Client(os.environ["API_TOKEN"], organizer, default_lang, pretix_domain)
+        return Client(os.environ["API_TOKEN"], organizer, default_lang, pretix_domain, read_only)
 
     def _get_headers(self):
         return {
@@ -73,13 +78,29 @@ class Client:
 
     def _patch(self, endpoint: str, data: Dict[str, Any]) -> Tuple[int, Any]:
         url = urljoin(self.pretix_domain, endpoint)
-        r = requests.patch(url, headers=self._post_headers(), json=data)
+        if self.read_only:
+            print('dry patch {url}:')
+            for key, value in data.items():
+                print(f'  {key}: {value}')
+            return 0, None
+        else:
+            r = requests.patch(url, headers=self._post_headers(), json=data)
+            r.raise_for_status()
+            try:
+                data = r.json()
+            except ValueError:
+                data = None
+            return r.status_code, data
+
+    def _post(self, endpoint: str, data: Dict[str, Any]) -> Tuple[int, Any]:
+        url = urljoin(self.pretix_domain, endpoint)
+        r = requests.post(url, headers=self._post_headers(), json=data)
         r.raise_for_status()
         try:
-            data = r.json()
+            response_data = r.json()
         except ValueError:
-            data = None
-        return r.status_code, data
+            response_data = None
+        return r.status_code, response_data
 
     # events
     def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
@@ -103,22 +124,21 @@ class Client:
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings/', patch_data)
 
     def _create_event(self, event_data) -> Event:
-        event = Event(
+        return Event(
             name=event_data['name'], slug=event_data['slug'], live=event_data['live'],
             date_from=event_data['date_from'], date_to=event_data['date_to'],
             public_url=event_data['public_url'], location=event_data['location'], default_lang=self.default_lang
         )
-        return event
 
     def clone_event(self, info: NewEventInfo, template: Event) -> Event:
-        url = urljoin(self.pretix_domain, f'/api/v1/organizers/{self.organizer}/events/{template.slug}/clone/')
-
         data = info.to_data()
         if 'location' not in data:
             data['location'] = template.location
-        r = requests.post(url, headers=self._post_headers(), json=data)
-        r.raise_for_status()
-        return self._create_event(r.json())
+
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{template.slug}/clone/'
+        status_code, response_data = self._post(endpoint, data)
+
+        return self._create_event(response_data)
 
     # products
     def get_event_products(self, event: Event | str, num_pages: int = -1) -> List[Product]:
