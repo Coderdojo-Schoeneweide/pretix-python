@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from simple_term_menu import TerminalMenu
+
 from client import Client
 from descriptions import DescriptionLoader
 from events import NewEventInfo
@@ -7,25 +9,34 @@ from utils import previous_weekday
 
 
 def main():
-    client = Client.from_env('dojosw', default_lang=Lang.DE)
+    client = Client.from_env('dojosw', default_lang=Lang.DE, read_only=True)
     events = client.get_events()
 
-    print('choose a template:')
-    for e in events[-10:]:
-        print(e.date_from, e.slug)
-
-    while True:
-        event_name = input('which event to clone: ')
-        template_event = next((event for event in events if event.slug == event_name), None)
-
-        if template_event:
-            print(template_event)
-            break
-        print("Event not found")
+    last_n_events = events[-10:][::-1]
+    options = ['{} {}'.format(e.date_from.isoformat(), e.slug) for e in last_n_events]
+    options.append('[c] cancel')
+    menu = TerminalMenu(options, title='Choose template event')
+    entry_select = menu.show()
+    if entry_select == len(options) - 1:
+        print('cancelled')
+        return
+    template_event = last_n_events[entry_select]
 
     # ask new data from user
     info = NewEventInfo.from_user_input(template_event.name)
     new_event = client.clone_event(info, template_event)
+
+    # change description
+    description_loader = DescriptionLoader.from_dir()
+    options = list(description_loader.descriptions.keys())
+    options.append('[c] cancel')
+    menu = TerminalMenu(options, title='Choose description')
+    entry_select = menu.show()
+    if entry_select == len(options) - 1:
+        print('cancelled')
+        return
+    description = description_loader.get_description(options[entry_select])
+    client.patch_event_settings(new_event, {'frontpage_text': description})
 
     # change available date from latecomer tickets
     products = client.get_event_products(new_event)
@@ -35,11 +46,5 @@ def main():
     client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
 
 
-def main2():
-    description_loader = DescriptionLoader.from_dir()
-    client = Client.from_env('dojosw', default_lang=Lang.DE)
-    result = client.patch_event_settings('cid-03-2025', {'frontpage_text': description_loader.descriptions['cid']})
-
-
 if __name__ == '__main__':
-    main2()
+    main()

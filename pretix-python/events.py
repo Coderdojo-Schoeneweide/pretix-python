@@ -61,7 +61,7 @@ class NewEventInfo:
         # date from
         date_options = []
         next_sat = None
-        for _ in range(5):
+        for _ in range(8):
             next_sat = next_saturday(next_sat)
             date_options.append(next_sat)
 
