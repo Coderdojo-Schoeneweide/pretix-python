@@ -11,7 +11,7 @@ class DescriptionLoader:
         self.descriptions = descriptions
 
     @staticmethod
-    def from_dir(dir_path: str = 'descriptions'):
+    def from_dir(dir_path: str = 'descriptions') -> "DescriptionLoader":
         descriptions = {}
         for desc_name in os.listdir(dir_path):
             desc_path = os.path.join(dir_path, desc_name)

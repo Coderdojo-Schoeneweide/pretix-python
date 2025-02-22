@@ -9,11 +9,11 @@ from utils import previous_weekday
 
 
 def main():
-    client = Client.from_env('dojosw', default_lang=Lang.DE, read_only=True)
+    client = Client.from_env('dojosw', default_lang=Lang.DE, read_only=False)
     events = client.get_events()
 
     last_n_events = events[-10:][::-1]
-    options = ['{} {}'.format(e.date_from.isoformat(), e.slug) for e in last_n_events]
+    options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in last_n_events]
     options.append('[c] cancel')
     menu = TerminalMenu(options, title='Choose template event')
     entry_select = menu.show()
@@ -35,7 +35,7 @@ def main():
     if entry_select == len(options) - 1:
         print('cancelled')
         return
-    description = description_loader.get_description(options[entry_select])
+    description = description_loader.descriptions[options[entry_select]]
     client.patch_event_settings(new_event, {'frontpage_text': description})
 
     # change available date from latecomer tickets

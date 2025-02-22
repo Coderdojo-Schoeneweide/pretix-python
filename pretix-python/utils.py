@@ -39,10 +39,13 @@ def user_choose_date(dates: List[datetime], title: str | None = None) -> Optiona
     if title is None:
         title = 'Choose date'
     options = [d.strftime("%a. %d.%m.%Y, %H:%M Uhr") for d in dates]
-    options.append('[c] custom...')
+    options.append('[o] other...')
+    options.append('[c] cancel')
     menu = TerminalMenu(options, title=title)
     menu_entry_index = menu.show()
     if menu_entry_index == len(options) - 1:
+        return None
+    if menu_entry_index == len(options) - 2:
         while True:
             user_input = input('enter date (eg 24.12.2025 11:00): ')
             try:
