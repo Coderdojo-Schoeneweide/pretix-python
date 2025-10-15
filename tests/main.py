@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import sys
 
 from simple_term_menu import TerminalMenu
 
@@ -46,11 +47,15 @@ def main():
     client.patch_event_settings(new_event, {'frontpage_text': description})
 
     # change available date from latecomer tickets
-    products = client.get_event_products(new_event)
-    latecomer_ticket = next(p for p in products if 'atecomer' in p.get_name(Lang.EN))
-    wednesday_before = previous_weekday(info.date_from, 2)
-    wednesday_before = wednesday_before.replace(hour=1)  # at 1 am
-    client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
+    try:
+        products = client.get_event_products(new_event)
+        latecomer_ticket = next(p for p in products if 'atecomer' in p.get_name(Lang.EN))
+        wednesday_before = previous_weekday(info.date_from, 2)
+        wednesday_before = wednesday_before.replace(hour=1)  # at 1 am
+        client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
+    except StopIteration:
+        # if no latecomer ticket is available
+        print("No latecomer ticket found. Failed to set availabilty date", file=sys.stderr)
 
 
 if __name__ == '__main__':
