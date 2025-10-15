@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import os
+
 from simple_term_menu import TerminalMenu
 
 from client import Client
