@@ -7,9 +7,14 @@ from events import NewEventInfo
 from lang import Lang
 from utils import previous_weekday
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def main():
-    client = Client.from_env('dojosw', default_lang=Lang.DE, read_only=False)
+    organizer = os.environ.get('ORGANIZER', 'dojosw')
+    client = Client.from_env(organizer, default_lang=Lang.DE, read_only=False)
     events = client.get_events()
 
     last_n_events = events[-10:][::-1]
