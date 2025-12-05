@@ -5,7 +5,7 @@ def setDevices(deviceList, description):
     
     updatedDescription = {}
 
-    # Der Text, der eingefügt wird, basierend auf den gewählten Geräten
+    # Text that is going to be added based on the devices
     de_text = "Das brauchst du:\nEin Gerät zum Programmieren (" + ", ".join(deviceList) + "). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
     en_text = "What you need:\nA device for programming ( " + ", ".join(deviceList) + "). If you don't have one, book an additional computer product or write to us. We'll find a solution!"
 
@@ -18,7 +18,7 @@ def setDevices(deviceList, description):
             updatedDescription[lang] = text
             continue
 
-        # Texte nach "Ablauf:, Schedule" und dem ersten doppelten Zeilenumbruch einfügen
+        # add text after "Ablauf, Schedule" and first double line break
         if "Ablauf:" in text:
             key = "Ablauf:"
         elif "Schedule:" in text:

@@ -44,7 +44,6 @@ def main():
         print('cancelled')
         return
     description = description_loader.descriptions[options[entry_select]]
-    print(description, "Das ist die Desc bevor")
 
     # add needed devices for workshop to description
     options = ["Laptop", "Tablet", "Smartphone"]

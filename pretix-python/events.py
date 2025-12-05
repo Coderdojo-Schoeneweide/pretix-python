@@ -28,7 +28,7 @@ class Event:
 
 
 def next_weekday(start: Optional[datetime], weekday: int, hour: int = 11, minute: int = 0) -> datetime:
-    """Gibt das nächste Datum >= start zurück mit bestimmtem Wochentag."""
+
     if start is None:
         start = datetime.now()
     days_ahead = (weekday - start.weekday()) % 7
@@ -57,18 +57,18 @@ class NewEventInfo:
         slug = input('slug: ')
 
         date_options = []
-        # Samstage (weekday = 5)
+        # Saturday (weekday = 5)
         current = None
         for _ in range(8):
             current = next_weekday(current, weekday=5)
             date_options.append(current)
-        # Donnerstage (weekday = 3)
+        # Thursday (weekday = 3)
         current = None
         for _ in range(8):
             current = next_weekday(current, weekday=3, hour=16, minute=30 )
             date_options.append(current)
 
-        # Chronologisch Sortierte Ansicht
+        # Chronologically ordered weekdays, uncomment if you want this display
         #date_options.sort()
 
         date_from = user_choose_date(date_options, 'choose start time')
