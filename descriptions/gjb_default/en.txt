@@ -1,0 +1,6 @@
+In diesem Workshop lernst du mittels Scratch deine ersten Schritte in die Welt der Programmierung zu setzen.
+
+Ablauf:
+16:20 - 16:30 - Einlass
+16:30 - 16:45 - Begrüßung & Ice-Breaker & Setup
+16:45 - 18:30 - Präsentation & Programmieren
