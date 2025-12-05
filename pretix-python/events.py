@@ -65,8 +65,11 @@ class NewEventInfo:
         # Donnerstage (weekday = 3)
         current = None
         for _ in range(8):
-            current = next_weekday(current, weekday=3)
+            current = next_weekday(current, weekday=3, hour=16, minute=30 )
             date_options.append(current)
+
+        # Chronologisch Sortierte Ansicht
+        #date_options.sort()
 
         date_from = user_choose_date(date_options, 'choose start time')
 

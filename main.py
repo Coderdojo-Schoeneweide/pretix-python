@@ -9,7 +9,7 @@ from descriptions import DescriptionLoader
 from events import NewEventInfo
 from lang import Lang
 from utils import previous_weekday
-
+from devices import setDevices
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -44,7 +44,16 @@ def main():
         print('cancelled')
         return
     description = description_loader.descriptions[options[entry_select]]
-    client.patch_event_settings(new_event, {'frontpage_text': description})
+    print(description, "Das ist die Desc bevor")
+    options = ["Laptop", "Tablet", "Smartphone", "Papier und Stifte"]
+    options.append('[c] cancel')
+    menu = TerminalMenu(options, title='What devices should be brought?', multi_select=True, multi_select_empty_ok=True)
+    entry_select = menu.show()
+    if entry_select == len(options) - 1:
+        print('cancelled')
+        return
+    updatedDesc = setDevices(menu.chosen_menu_entries, description)
+    client.patch_event_settings(new_event, {'frontpage_text': updatedDesc})
 
     # change available date from latecomer tickets
     try:
