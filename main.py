@@ -45,9 +45,11 @@ def main():
         return
     description = description_loader.descriptions[options[entry_select]]
     print(description, "Das ist die Desc bevor")
-    options = ["Laptop", "Tablet", "Smartphone", "Papier und Stifte"]
+
+    # add needed devices for workshop to description
+    options = ["Laptop", "Tablet", "Smartphone"]
     options.append('[c] cancel')
-    menu = TerminalMenu(options, title='What devices should be brought?', multi_select=True, multi_select_empty_ok=True)
+    menu = TerminalMenu(options, title='What devices should be brought? (Select with space)', multi_select=True, multi_select_empty_ok=True)
     entry_select = menu.show()
     if entry_select == len(options) - 1:
         print('cancelled')
