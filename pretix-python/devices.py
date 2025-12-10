@@ -7,7 +7,7 @@ def setDevices(deviceList, description):
 
     # Text that is going to be added based on the devices
     de_text = "Das brauchst du:\nEin Gerät zum Programmieren (" + ", ".join(deviceList) + "). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
-    en_text = "What you need:\nA device for programming ( " + ", ".join(deviceList) + "). If you don't have one, book an additional computer product or write to us. We'll find a solution!"
+    en_text = "What you need:\nA device for programming (" + ", ".join(deviceList) + "). If you don't have one, book an additional computer product or write to us. We'll find a solution!"
 
     for lang, text in description.items():
         if lang.startswith("de"):

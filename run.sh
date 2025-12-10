@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PROJ="$(cd "$(dirname "$0")" && pwd)"
+cd "$PROJ"
 
 case "$1" in
     r)	
