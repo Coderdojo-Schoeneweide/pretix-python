@@ -20,25 +20,22 @@ class Event:
         self.default_lang = default_lang
 
     def __repr__(self):
-        return (f'Event(slug={self.slug}  name="{self.get_name()}"  date_from={self.date_from.isoformat()}  '
+        return (f'Event(slug={self.slug}  name=\"{self.get_name()}\"  date_from={self.date_from.isoformat()}  '
                 f'date_to={self.date_to.isoformat()})')
 
     def get_name(self, lang: Optional[Lang] = None) -> str:
         return get_from_lang(self.name, lang, self.default_lang)
 
 
-def next_saturday(start_point: Optional[datetime] = None) -> datetime:
-    start_point = start_point or datetime.now()
+def next_weekday(start: Optional[datetime], weekday: int, hour: int = 11, minute: int = 0) -> datetime:
 
-    # Find the next Saturday
-    days_until_saturday = (5 - start_point.weekday()) % 7  # Saturday is index 5 in Python's weekday()
-    if days_until_saturday == 0:  # If today is Saturday, move to the next one
-        days_until_saturday = 7
-
-    next_sat = start_point + timedelta(days=days_until_saturday)
-    next_saturday_11am = next_sat.replace(hour=11, minute=0, second=0, microsecond=0)
-
-    return next_saturday_11am
+    if start is None:
+        start = datetime.now()
+    days_ahead = (weekday - start.weekday()) % 7
+    if days_ahead == 0:
+        days_ahead = 7
+    d = start + timedelta(days=days_ahead)
+    return d.replace(hour=hour, minute=minute, second=0, microsecond=0)
 
 
 class NewEventInfo:
@@ -49,21 +46,30 @@ class NewEventInfo:
         self.date_to = date_to
 
     def __repr__(self):
-        return f'NewEventInfo(slug={self.slug}, name={self.name}, date_from={self.date_from}, date_to={self.date_to})'
+        return (f'NewEventInfo(slug={self.slug}, name={self.name}, '
+                f'date_from={self.date_from}, date_to={self.date_to})')
 
     @staticmethod
-    def from_user_input(name):
+    def from_user_input(name: Dict[str, str]):
         print('create new event info')
 
         # slug
         slug = input('slug: ')
 
-        # date from
         date_options = []
-        next_sat = None
+        # Saturday (weekday = 5)
+        current = None
         for _ in range(8):
-            next_sat = next_saturday(next_sat)
-            date_options.append(next_sat)
+            current = next_weekday(current, weekday=5)
+            date_options.append(current)
+        # Thursday (weekday = 3)
+        current = None
+        for _ in range(8):
+            current = next_weekday(current, weekday=3, hour=16, minute=30 )
+            date_options.append(current)
+
+        # Chronologically ordered weekdays, uncomment if you want this display
+        #date_options.sort()
 
         date_from = user_choose_date(date_options, 'choose start time')
 
