@@ -1,0 +1,19 @@
+In this workshop, participants learn in a practical and playful way how computers communicate with each other in a local network.
+In small groups, they connect their devices via LAN or WLAN, find out their own IP addresses, and exchange files directly via the command prompt. In the process, they jointly create a continuous story that is added to by all group members.
+Through this workshop, participants will understand how data is transferred within a network, how to check connections, and how to identify simple network problems. At the same time, it promotes teamwork and technical understanding in dealing with networks.
+
+Schedule:
+10:50 - 11:00 - Admission
+11:00 - 11:15 - Welcome & icebreaker & setup
+11:15 a.m. - 12:45 p.m. - Try it out
+12:45 p.m. - 1:00 p.m. - Showtime
+
+What you need:
+Nothing, really :) We have computers for everyone in this workshop.
+
+If you are under 13 years old: A parent or guardian to accompany you during the dojo.
+The parent or guardian also needs their own ticket. If the combination of tickets your family needs is no longer available, just write to us and we'll see if we can find a solution.
+
+Friends and siblings are also welcome to join in! Just book several tickets. If your siblings are under 7 years old, they don't need their own ticket.
+
+Anyone who wants to is welcome to bring a small snack or drink. We always try to provide a small buffet.
