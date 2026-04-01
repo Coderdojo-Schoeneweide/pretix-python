@@ -1,7 +1,6 @@
-In this workshop, we will look at what makes different countries different and build a common world map in Scratch.
-You will program a description for a country of your choice. At the end, everything will be put together.
-
-Well suited if you are a beginner or would like to deepen your Scratch skills.
+Welcome to the MBot Driving School!
+Here you will learn how to program your MBot to navigate traffic safely, intelligently, and independently.
+No prior knowledge is required.
 
 Schedule:
 10:50 - 11:00 - Admission
@@ -10,7 +9,7 @@ Schedule:
 12:45 - 13:00 - Show time: who did what today?
 
 What you need:
-A device for programming (e.g. laptop, tablet, smartphone). If you don't have one, book an additional computer product or write to us. We'll find a solution!
+A laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!
 Paper and pens for your designs and notes.
 
 If you are under 13 years old: One:n legal guardian to accompany you during the dojo. The guardian also needs a separate ticket. If the combination of tickets your family needs is no longer available, just write us and we'll see if we can find a solution.

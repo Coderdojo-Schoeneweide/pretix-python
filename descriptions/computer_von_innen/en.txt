@@ -1,13 +1,8 @@
-In this workshop, we will look at what makes different countries different and build a common world map in Scratch.
-You will program a description for a country of your choice. At the end, everything will be put together.
+What actually happens inside a computer?
+In this workshop, we'll take a closer look at how a computer works :)
 
-Well suited if you are a beginner or would like to deepen your Scratch skills.
-
-Schedule:
-10:50 - 11:00 - Admission
-11:00 - 11:15 - Welcome & Ice-Breaker & Setup
-11:15 - 12:45 - Programming
-12:45 - 13:00 - Show time: who did what today?
+No prior knowledge is required. Recommended for children aged 9 and above.
+Knowledge of German is required.
 
 What you need:
 A device for programming (e.g. laptop, tablet, smartphone). If you don't have one, book an additional computer product or write to us. We'll find a solution!

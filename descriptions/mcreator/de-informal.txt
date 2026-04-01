@@ -1,14 +1,17 @@
-Hier basteln wir unsere eigenen Drohnen und lassen sie fliegen!
+In diesem Workshop lernen Kinder ab 9 Jahren, wie sie ihre eigene kleine Mod für Minecraft erstellen – ganz ohne Programmiererfahrung!
+Mit MCreator nutzen wir einfache Code-Blöcke, um neue Gegenstände, Kreaturen oder Spielmechaniken zu erschaffen. Das Ganze funktioniert visuell und spielerisch.
+MCreator ist auf Englisch – darum sind ein bisschen Englischkenntnisse oder die Unterstützung durch Eltern hilfreich.
+Bitte bring deinen eigenen Laptop mit oder buche ein Computer-Ticket.
 
 Ablauf:
 10:50 - 11:00 - Einlass
 11:00 - 11:15 - Begrüßung & Ice-Breaker & Setup
-11:15 - 13:45 - Basteln und Ausprobieren
-13:45 - 14:00 - Abschluss und Testflüge
+11.15 - 12.45 - Programmieren
+12.45 - 13.00 - Show-Time: Wer hat heute was gemacht?
 
 Das brauchst du:
-Ein Gerät zum Programmieren am besten eine Laptop. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Wenn du möchtest Papier und Stifte für deine Notizen.
+Ein Laptop zum Programmieren. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
+Papier und Stifte für deine Designs und Notizen.
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

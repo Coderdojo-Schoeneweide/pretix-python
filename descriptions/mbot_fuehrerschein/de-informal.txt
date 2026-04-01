@@ -1,14 +1,15 @@
-Hier basteln wir unsere eigenen Drohnen und lassen sie fliegen!
+Willkommen in der MBot Fahrschule!
+Hier lernst du, wie du deinen MBot sicher, clever und selbstständig durch den Straßenverkehr programmierst.
+Vorkenntnisse werden nicht benötigt.
 
 Ablauf:
 10:50 - 11:00 - Einlass
 11:00 - 11:15 - Begrüßung & Ice-Breaker & Setup
-11:15 - 13:45 - Basteln und Ausprobieren
-13:45 - 14:00 - Abschluss und Testflüge
+11.15 - 12.45 - Programmieren
+12.45 - 13.00 - Show-Time: Wer hat heute was gemacht?
 
 Das brauchst du:
-Ein Gerät zum Programmieren am besten eine Laptop. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Wenn du möchtest Papier und Stifte für deine Notizen.
+Einen Laptop zum Programmieren. Falls du keinen hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

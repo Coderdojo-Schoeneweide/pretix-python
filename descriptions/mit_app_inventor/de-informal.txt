@@ -1,14 +1,15 @@
-Hier basteln wir unsere eigenen Drohnen und lassen sie fliegen!
+In diesem Workshop lernst du mittels MIT App Inventor deine erste eigene App zu programmieren.
 
 Ablauf:
 10:50 - 11:00 - Einlass
 11:00 - 11:15 - Begrüßung & Ice-Breaker & Setup
-11:15 - 13:45 - Basteln und Ausprobieren
-13:45 - 14:00 - Abschluss und Testflüge
+11.15 - 12.45 - Programmieren
+12.45 - 13.00 - Show-Time: Wer hat heute was gemacht?
 
 Das brauchst du:
-Ein Gerät zum Programmieren am besten eine Laptop. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Wenn du möchtest Papier und Stifte für deine Notizen.
+Ein Gerät zum Programmieren (z.B. Laptop, Tablet, Smartphone). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
+Um deine App anzuschauen, ist auch ein Smartphone mit Android hilfreich.
+Papier und Stifte für deine Designs und Notizen.
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 
