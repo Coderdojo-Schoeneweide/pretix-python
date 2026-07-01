@@ -1,6 +1,6 @@
 def setDevices(deviceList, description):
 
-    if deviceList is None:
+    if deviceList:
         return description
     
     updatedDescription = {}
