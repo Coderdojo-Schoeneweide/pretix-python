@@ -10,7 +10,7 @@ from descriptions import DescriptionLoader
 from events import NewEventInfo, Event
 from lang import Lang
 from utils import previous_weekday, choice_to_int
-from devices import set_devices
+from devices import set_devices, update_devices
 from dotenv import load_dotenv
 
 load_dotenv()

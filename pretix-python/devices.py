@@ -5,10 +5,13 @@ from simple_term_menu import TerminalMenu
 
 from client import Client
 from events import Event
-from utils import choice_to_entries
+from utils import choice_to_entries, has_format_placeholder
 
 
 def update_devices(client: Client, event: Event, description: Dict[str, str]):
+    if not contains_fstring(description):
+        return
+
     options = ["Laptop", "Tablet", "Smartphone"]
     menu = TerminalMenu(
         options,
@@ -21,6 +24,13 @@ def update_devices(client: Client, event: Event, description: Dict[str, str]):
         sys.exit(0)
     updated_desc = set_devices(choice_to_entries(menu), description)
     client.patch_event_settings(event, {'frontpage_text': updated_desc})
+
+
+def contains_fstring(description: Dict[str, str]) -> bool:
+    for text in description.values():
+        if has_format_placeholder(text, 'devices'):
+            return True
+    return False
 
 
 def set_devices(device_list: Iterable[str], description: Dict[str, str]):

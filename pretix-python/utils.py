@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Callable, Dict, Any, Optional, List, Tuple
+import string
 
 from simple_term_menu import TerminalMenu
 
@@ -68,3 +69,11 @@ def choice_to_entries(menu: TerminalMenu) -> Tuple[str, ...]:
     if isinstance(entries, tuple):
         return entries
     raise Exception('menu entry is not tuple')
+
+
+def has_format_placeholder(fmt_string: str, key: str) -> bool:
+    """Returns True if '{key}' is a valid placeholder in the format string."""
+    return any(
+        field_name == key
+        for _, field_name, _, _ in string.Formatter().parse(fmt_string)
+    )
