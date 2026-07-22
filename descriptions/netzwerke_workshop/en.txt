@@ -8,8 +8,7 @@ Schedule:
 11:15 a.m. - 12:45 p.m. - Try it out
 12:45 p.m. - 1:00 p.m. - Showtime
 
-What you need:
-Nothing, really :) We have computers for everyone in this workshop.
+{devices}
 
 If you are under 13 years old: A parent or guardian to accompany you during the dojo.
 The parent or guardian also needs their own ticket. If the combination of tickets your family needs is no longer available, just write to us and we'll see if we can find a solution.

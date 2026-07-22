@@ -3,9 +3,7 @@ Dafür nutzen wir Miro, ein digitales Whiteboard, auf dem wir gemeinsam zeichnen
 Vorkenntnisse sind nicht nötig – du brauchst nur Lust auf Kreativität und Teamarbeit. Unsere Mentor:innen helfen dir beim Einstieg und unterstützen dich dabei, deine Ideen zum Leben zu bringen.
 Hast du Lust, etwas Eigenes zu erschaffen und mit anderen zusammen eine ganze Fantasiewelt aufzubauen? Dann mach mit!
 
-Das brauchst du:
-Ein Laptop zum Programmieren. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Papier und Stifte für deine Designs und Notizen.
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

@@ -1,3 +1,5 @@
+Hinweis: Dieser Workshop findet im selben Format am Donnerstag und Freitag statt. Am besten melde dich nur für einen der Workshops an, sodass auch für andere Tickets übrig bleiben.
+
 In diesem Workshop erwecken wir den cleveren Roboter Dash zum Leben!
 Gemeinsam programmieren wir Dash für aufregende Herausforderungen: Wir schießen Tore beim Roboter-Fußball, führen ein kleines Theaterstück auf, bauen eine mechanische Schleuder und steuern ihn geschickt durch ein kniffliges Labyrinth.
 

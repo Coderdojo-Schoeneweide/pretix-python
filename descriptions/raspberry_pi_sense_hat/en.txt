@@ -9,8 +9,7 @@ Curious? Then drop by and become a pixel artist!
 
 For kids ages 9 to 17.
 
-### What you need:
-* A laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!
+{devices}
 
 If you are under 13 years old: One:n legal guardian to accompany you during the dojo. The guardian also needs a separate ticket. If the combination of tickets your family needs is no longer available, just write us and we'll see if we can find a solution.
 

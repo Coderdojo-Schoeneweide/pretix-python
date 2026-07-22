@@ -5,5 +5,5 @@ Process:
 4:30 p.m. - 4:45 p.m. - Welcome & ice breaker & setup
 4:45 p.m. - 6:30 p.m. - Presentation & programming
 
-This is what you need:
-A device for programming (e.g. laptop, tablet). If you don't have one, book an additional computer product or write to us. We will find a solution!
+{devices}
+

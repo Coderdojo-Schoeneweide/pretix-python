@@ -3,9 +3,7 @@ To do this, we’ll use Miro, a digital whiteboard where we can draw, write, col
 No prior experience is necessary—all you need is a desire for creativity and teamwork. Our mentors will help you get started and support you in bringing your ideas to life.
 Do you want to create something of your own and build an entire fantasy world together with others? Then join us!
 
-What you need:
-A laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!
-Paper and pens for your designs and notes.
+{devices}
 
 If you are under 13 years old: One:n legal guardian to accompany you during the dojo. The guardian also needs a separate ticket. If the combination of tickets your family needs is no longer available, just write us and we'll see if we can find a solution.
 

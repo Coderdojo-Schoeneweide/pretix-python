@@ -2,8 +2,7 @@ In this workshop, we’re blending the world of storytelling with the magic of c
 You can use Scratch or, if you’re already an expert, feel free to use any other tool you prefer. At the end, we’ll put our pieces together and watch our digital book come to life!
 For children ages 7–17. No prior experience necessary.
 
-What you need:
-A laptop or pc for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!
+{devices}
 
 If you are under 13 years old: One:n legal guardian to accompany you during the dojo. The guardian also needs a separate ticket. If the combination of tickets your family needs is no longer available, just write us and we'll see if we can find a solution.
 

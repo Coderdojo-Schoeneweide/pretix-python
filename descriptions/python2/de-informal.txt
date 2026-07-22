@@ -2,8 +2,7 @@ In diesem Workshop schauen wir uns an, wie man mit dem Computer Musik programmie
 
 Da wir direkt mit Text-Code arbeiten, ist dieser Workshop ideal für dich, wenn du schon erste Erfahrungen gesammelt hast – zum Beispiel mit Scratch oder anderen Plattformen. Wir helfen dir natürlich!
 
-Das brauchst du:
-Einen Laptop zum Programmieren. Falls du keinen hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
+{devices}
 
 Falls du unter 13 Jahren alt bist:
 Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.

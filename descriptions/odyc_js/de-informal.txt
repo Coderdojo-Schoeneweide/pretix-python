@@ -5,5 +5,5 @@ Ablauf:
 16:30 - 16:45 - Begrüßung & Ice-Breaker & Setup
 16:45 - 18:30 - Präsentation & Programmieren
 
-Das brauchst du:
-Ein Gerät zum Programmieren (z.B. Laptop, Tablet). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
+{devices}
+

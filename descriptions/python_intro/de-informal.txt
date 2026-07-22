@@ -9,9 +9,7 @@ Ablauf:
 11.15 - 12.45 - Programmieren
 12.45 - 13.00 - Show-Time: Wer hat heute was gemacht?
 
-Das brauchst du:
-Ein Gerät zum Programmieren (z.B. Laptop, Tablet, Smartphone). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Papier und Stifte für deine Designs und Notizen.
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

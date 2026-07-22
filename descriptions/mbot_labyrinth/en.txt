@@ -12,9 +12,7 @@ Procedure:
 11:15 - 12:45 - Tinkering and trying out
 12:45 - 13:00 - Showtime and Closing
 
-What you need:
-A device for programming, preferably a laptop. If you don't have one, book an additional computer product or write to us. We will find a solution!
-If you like, paper and pens for your notes.
+{devices}
 
 If you are under 13 years old: A parent or guardian to accompany you during the dojo. The legal guardian also needs their own ticket. If the combination of tickets required by your family is no longer available, just write to us and we will see if we can find a solution.
 

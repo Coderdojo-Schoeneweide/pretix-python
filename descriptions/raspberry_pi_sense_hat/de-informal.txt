@@ -9,8 +9,7 @@ Neugierig? Dann komm vorbei und werde zum Pixel-Künstler!
 
 Empfohlen für Kinder zwischen 9 und 17 Jahren.
 
-### Das brauchst du:
-* Ein Laptop zum Programmieren. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

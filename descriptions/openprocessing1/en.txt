@@ -9,9 +9,7 @@ Schedule:
 11:15 - 12:45 - Programming
 12.45 - 13.00 - Show-Time: Who did what today?
 
-What you need:
-A PC or laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!
-Paper and pens for your designs and notes.
+{devices}
 
 If you are under 13 years old: A parent or guardian who will accompany you during the dojo. The legal guardian also needs their own ticket. If the combination of tickets required by your family is no longer available, just write to us and we will see if we can find a solution.
 

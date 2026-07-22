@@ -3,9 +3,7 @@ Dabei programmiert ihr eine Beschreibung für ein Land, das ihr euch aussuchen k
 
 Gut geeignet, wenn du Anfänger bist oder Lust hast Scratch zu vertiefen.
 
-Das brauchst du:
-Ein Gerät zum Programmieren (z.B. Laptop). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Papier und Stifte für deine Designs und Notizen.
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

@@ -6,9 +6,7 @@ Ablauf:
 11:15 - 13:45 - Basteln und Ausprobieren
 13:45 - 14:00 - Abschluss und Testflüge
 
-Das brauchst du:
-Ein Gerät zum Programmieren am besten eine Laptop. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Wenn du möchtest Papier und Stifte für deine Notizen.
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

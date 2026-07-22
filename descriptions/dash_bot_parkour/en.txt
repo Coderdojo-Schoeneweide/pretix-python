@@ -1,3 +1,5 @@
+Note: This workshop will be held in the same format on Thursday and Friday. It's best to register for only one of the workshops so that tickets are available for others as well.
+
 In this workshop, we will bring the clever robot Dash to life!
 Together, we will program Dash for four exciting challenges: scoring goals in robot soccer, performing a short theatrical play, building a mechanical catapult,
 and navigating a tricky maze.

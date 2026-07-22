@@ -4,9 +4,7 @@ Gemeinsam schauen wir uns an, wie man aus geometrischen Formen, coolen Farben un
 
 Du brauchst keine Programmier-Erfahrung! Wenn du schon mal Scratch ausprobiert hast, ist das super, aber unsere Mentor:innen helfen dir bei jedem Schritt.
 
-Das brauchst du:
-Ein Laptop zum Programmieren. Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Papier und Stifte für deine Designs und Notizen.
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

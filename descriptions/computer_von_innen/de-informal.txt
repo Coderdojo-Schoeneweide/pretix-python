@@ -4,9 +4,7 @@ In diesem Workshop schauen wir mal etwas genauer hin, wie ein Computer funktioni
 Vorkenntnisse werden nicht benötigt. Für Kinder ab 9 Jahren empfohlen.
 Deutschkenntnisse sind nötig.
 
-Das brauchst du:
-Ein Gerät zum Programmieren (z.B. Laptop, Tablet, Smartphone). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!
-Papier und Stifte für deine Designs und Notizen.
+{devices}
 
 Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
 

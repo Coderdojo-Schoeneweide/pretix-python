@@ -6,10 +6,7 @@ Schedule:
 11:15 - 12:45 - Programming
 12:45 - 13:00 - Show time: who did what today?
 
-What you need:
-A device for programming (e.g. laptop).  If you don't have one, book an additional computer product or write to us. We'll find a solution!
-If you want to view your app, an android smartphone is helpful.
-Paper and pens for your designs and notes.
+{devices}
 
 If you are under 13 years old: One legal guardian to accompany you during the dojo. The guardian also needs a separate ticket. If the combination of tickets your family needs is no longer available, just write us and we'll see if we can find a solution.
 

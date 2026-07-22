@@ -2,9 +2,7 @@ Dive into the world of Roblox and turn from a player into a developer! In these 
 We will explore how to build obstacle courses (Obbys), move objects, and take our first steps with the Lua programming language. The two sessions complement each other, but can also be booked individually. If you already have some experience, you can jump straight into Part 2; for beginners, we recommend starting with Part 1.
 Our mentors will be there to help you bring your ideas to life. Just bring your creativity!
 
-What you need:
-A laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!
-Paper and pens for your designs and notes.
+{devices}
 
 If you are under 13 years old: One:n legal guardian to accompany you during the dojo. The guardian also needs a separate ticket. If the combination of tickets your family needs is no longer available, just write us and we'll see if we can find a solution.
 
