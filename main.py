@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 import os
 import sys
+from typing import Dict
 
 from simple_term_menu import TerminalMenu
 
 from client import Client
 from descriptions import DescriptionLoader
-from events import NewEventInfo
+from events import NewEventInfo, Event
 from lang import Lang
-from utils import previous_weekday
-from devices import setDevices
+from utils import previous_weekday, choice_to_int
+from devices import set_devices
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,7 +25,8 @@ def main():
     options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in last_n_events]
     options.append('[c] cancel')
     menu = TerminalMenu(options, title='Choose template event')
-    entry_select = menu.show()
+    entry_select = choice_to_int(menu.show())
+
     if entry_select == len(options) - 1:
         print('cancelled')
         return
@@ -39,21 +41,15 @@ def main():
     options = list(description_loader.descriptions.keys())
     options.append('[c] cancel')
     menu = TerminalMenu(options, title='Choose description')
-    entry_select = menu.show()
+    entry_select = choice_to_int(menu.show())
+
     if entry_select == len(options) - 1:
         print('cancelled')
         return
     description = description_loader.descriptions[options[entry_select]]
 
     # add needed devices for workshop to description
-    options = ["Laptop", "Tablet", "Smartphone"]
-    menu = TerminalMenu(options, title='What devices should be brought?\nInfo: Press Enter without selecting for no additional devices-text\n * Select with space', multi_select=True, multi_select_empty_ok=True)
-    entry_select = menu.show()
-    if entry_select == len(options) - 1:
-        print('cancelled')
-        return
-    updatedDesc = setDevices(menu.chosen_menu_entries, description)
-    client.patch_event_settings(new_event, {'frontpage_text': updatedDesc})
+    update_devices(client, new_event, description)
 
     # change available date from latecomer tickets
     try:
@@ -69,3 +65,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+

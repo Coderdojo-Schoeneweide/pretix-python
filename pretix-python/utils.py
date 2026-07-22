@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Callable, Dict, Any, Optional, List
+from typing import Callable, Dict, Any, Optional, List, Tuple
 
 from simple_term_menu import TerminalMenu
 
@@ -42,7 +42,7 @@ def user_choose_date(dates: List[datetime], title: str | None = None) -> Optiona
     options.append('[o] other...')
     options.append('[c] cancel')
     menu = TerminalMenu(options, title=title)
-    menu_entry_index = menu.show()
+    menu_entry_index = choice_to_int(menu.show())
     if menu_entry_index == len(options) - 1:
         return None
     if menu_entry_index == len(options) - 2:
@@ -55,3 +55,16 @@ def user_choose_date(dates: List[datetime], title: str | None = None) -> Optiona
                 continue
     else:
         return dates[menu_entry_index]
+
+
+def choice_to_int(choice: int | Tuple[int, ...] | None) -> int:
+    if isinstance(choice, int):
+        return choice
+    raise Exception('menu entry is tuple')
+
+
+def choice_to_entries(menu: TerminalMenu) -> Tuple[str, ...]:
+    entries = menu.chosen_menu_entries
+    if isinstance(entries, tuple):
+        return entries
+    raise Exception('menu entry is not tuple')
