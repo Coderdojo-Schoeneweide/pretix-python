@@ -49,7 +49,8 @@ def main():
     description = description_loader.descriptions[options[entry_select]]
 
     # add needed devices for workshop to description
-    update_devices(client, new_event, description)
+    updated_desc = update_devices(description)
+    client.patch_event_settings(new_event, {'frontpage_text': updated_desc})
 
     # change available date from latecomer tickets
     try:

@@ -3,14 +3,12 @@ from typing import Dict, Iterable
 
 from simple_term_menu import TerminalMenu
 
-from client import Client
-from events import Event
 from utils import choice_to_entries, has_format_placeholder
 
 
-def update_devices(client: Client, event: Event, description: Dict[str, str]):
+def update_devices(description: Dict[str, str]) -> Dict[str, str]:
     if not contains_fstring(description):
-        return
+        return description
 
     options = ["Laptop", "Tablet", "Smartphone"]
     menu = TerminalMenu(
@@ -23,7 +21,7 @@ def update_devices(client: Client, event: Event, description: Dict[str, str]):
         print('cancelled')
         sys.exit(0)
     updated_desc = set_devices(choice_to_entries(menu), description)
-    client.patch_event_settings(event, {'frontpage_text': updated_desc})
+    return updated_desc
 
 
 def contains_fstring(description: Dict[str, str]) -> bool:
@@ -33,8 +31,8 @@ def contains_fstring(description: Dict[str, str]) -> bool:
     return False
 
 
-def set_devices(device_list: Iterable[str], description: Dict[str, str]):
-    if device_list:
+def set_devices(device_list: Iterable[str], description: Dict[str, str]) -> Dict[str, str]:
+    if not device_list:
         return description
     
     updated_description = {}
@@ -52,8 +50,7 @@ def set_devices(device_list: Iterable[str], description: Dict[str, str]):
             updated_description[lang] = text
             continue
 
-        updated_text = text.format(devices=add_text)
-        updated_description[lang] = updated_text
+        updated_description[lang] = text.format(devices=add_text)
 
     return updated_description
 
