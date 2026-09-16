@@ -132,6 +132,10 @@ class Client:
         event = event.slug if isinstance(event, Event) else event
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'name': title})
 
+    def update_event_location(self, event: Event | str, location: Dict[str, str]):
+        event = event.slug if isinstance(event, Event) else event
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'location': location})
+
     def _create_event(self, event_data) -> Event:
         return Event(
             name=event_data['name'], slug=event_data['slug'], live=event_data['live'],

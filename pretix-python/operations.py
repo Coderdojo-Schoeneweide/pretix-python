@@ -1,3 +1,4 @@
+import json
 import sys
 from datetime import datetime, timedelta
 
@@ -8,7 +9,7 @@ from descriptions import DescriptionLoader, split_title, ensure_title
 from devices import update_devices
 from events import Event, NewEventInfo
 from lang import Lang, for_multilang
-from utils import choice_to_int
+from utils import choice_to_int, get_single_choice
 
 
 def choose_event(client: Client) -> Event:
@@ -16,7 +17,7 @@ def choose_event(client: Client) -> Event:
     last_n_events = events[-10:][::-1]
     options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in last_n_events]
     options.append('[c] cancel')
-    menu = TerminalMenu(options, title='Choose template event')
+    menu = TerminalMenu(options, title='Choose template event', clear_menu_on_exit=False)
     entry_select = choice_to_int(menu.show())
 
     if entry_select == len(options) - 1:
@@ -29,7 +30,7 @@ def change_description(client: Client, event: Event):
     description_loader = DescriptionLoader.from_dir()
     options = list(description_loader.descriptions.keys())
     options.append('[c] cancel')
-    menu = TerminalMenu(options, title='Choose description')
+    menu = TerminalMenu(options, title='Choose description', clear_menu_on_exit=False)
     entry_select = choice_to_int(menu.show())
 
     if entry_select == len(options) - 1:
@@ -46,6 +47,18 @@ def change_description(client: Client, event: Event):
     client.patch_event_settings(event, {'frontpage_text': desc})
     if any(title.values()):
         client.update_event_title(event, ensure_title(title))
+
+
+def change_location(client: Client, event: Event):
+    with open('event_locations.json') as f:
+        locations = json.load(f)
+    choices = list(locations.keys()) + ['Cancel']
+    choice = get_single_choice('Location?', choices)
+    if choice == len(choices) - 1:
+        print('canceled')
+        sys.exit(1)
+    location = locations[choice]
+    client.update_event_location(event, location)
 
 
 def update_latecomer_avail_date(client: Client, event: Event, workshop_date: datetime):

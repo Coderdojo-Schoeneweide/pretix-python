@@ -42,7 +42,7 @@ def user_choose_date(dates: List[datetime], title: str | None = None) -> Optiona
     options = [d.strftime("%a. %d.%m.%Y, %H:%M Uhr") for d in dates]
     options.append('[o] other...')
     options.append('[c] cancel')
-    menu = TerminalMenu(options, title=title)
+    menu = TerminalMenu(options, title=title, clear_menu_on_exit=False)
     menu_entry_index = choice_to_int(menu.show())
     if menu_entry_index == len(options) - 1:
         return None
@@ -62,6 +62,11 @@ def choice_to_int(choice: int | Tuple[int, ...] | None) -> int:
     if isinstance(choice, int):
         return choice
     raise Exception('menu entry is tuple')
+
+
+def get_single_choice(title: str, options: List[str]) -> int:
+    menu = TerminalMenu(options, title=title, clear_menu_on_exit=False)
+    return choice_to_int(menu.show())
 
 
 def choice_to_entries(menu: TerminalMenu) -> Tuple[str, ...]:
