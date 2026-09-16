@@ -1,3 +1,5 @@
+# Bilder malen mit mit Code
+
 In diesem Workshop wirst du zum digitalen Schöpfer. Mit der Programmiersprache JavaScript und der Plattform OpenProcessing erwecken wir deinen ganz persönlichen Roboter-Avatar zum Leben.
 
 Gemeinsam schauen wir uns an, wie man aus geometrischen Formen, coolen Farben und ein bisschen Code-Magie einzigartige Roboter-Gesichter bastelt. Das Beste daran? Du lernst ganz nebenbei die Grundlagen des Programmierens!

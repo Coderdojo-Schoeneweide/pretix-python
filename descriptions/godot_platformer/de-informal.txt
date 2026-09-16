@@ -1,3 +1,5 @@
+# Spiele bauen wie Profis
+
 Hast du Lust, dein eigenes 2D-Spiel zu entwickeln? In diesem Workshop lernst du die Game-Engine Godot kennen! Gemeinsam bauen wir ein klassisches Plattformspiel mit hüpfenden Charakteren, Hindernissen und eigenen Leveln.
 Erste Programmiererfahrung (z. B. mit Scratch oder einer anderen Sprache) ist sehr hilfreich! Geeignet für Kinder ab 10 Jahren.
 

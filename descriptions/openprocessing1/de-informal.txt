@@ -1,3 +1,5 @@
+# Kreatives Coden mit OpenProcessing
+
 Workshop: Kreatives Coden mit JavaScript und OpenProcessing
 In diesem Workshop tauchen die Kinder auf spielerische Weise in die Welt des Programmierens ein - mit JavaScript und der Kreativplattform OpenProcessing! Gemeinsam entdecken wir, wie man mit wenigen Zeilen Code bunte Formen, Animationen und kleine Kunstwerke erschaffen kann.
 Vorkenntnisse sind nicht erforderlich - aber wenn Sie bereits mit Scratch oder einer anderen Lernplattform gearbeitet haben, wird Ihnen der Einstieg leichter fallen. Unsere Mentoren unterstützen dich bei jedem Schritt!

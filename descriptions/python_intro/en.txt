@@ -1,3 +1,5 @@
+# Creative Coding with Python
+
 In this workshop, you'll dive into one of the most popular programming languages in the world: Python! With the help of Jupyter Notebooks, we’ll code directly in the browser – step by step, and without needing to install anything.
 
 You'll learn how to do calculations with Python, write small programs, and solve simple puzzles. Maybe you’ll even bring your own ideas!

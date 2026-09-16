@@ -1,3 +1,5 @@
+# Scratch intro
+
 In this workshop you will learn to take your first steps into the world of programming using Scratch.
 
 Process:

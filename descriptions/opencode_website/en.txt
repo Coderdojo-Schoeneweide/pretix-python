@@ -1,3 +1,5 @@
+# Create Your Own Website with AI
+
 In this workshop, you'll learn how websites are built today – with smart support from AI!
 Together, we will use OpenCode and Agentic Coding tools that act like a digital assistant, helping you write and design code.
 We’ll show you how to turn your ideas into your very own website, add images and text, and let the AI help you solve problems along the way.

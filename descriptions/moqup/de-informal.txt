@@ -1,3 +1,5 @@
+# Eine eigene Webseite erstellen
+
 In diesem Workshop werdet ihr zu Designer:innen und gestaltet eure eigene Website – ganz ohne Programmieren!
 Mit dem Online-Werkzeug Moqups baut ihr im Zweier-Team ein klickbares "Mockup": das Vorschau-Bild einer Website, mit Knöpfen, Menüs und Bildern.
 Zuerst spielen wir ein lustiges Spiel rund um „Was ich denke vs. was ankommt“, dann bekommt ihr einen echten Design-Auftrag.

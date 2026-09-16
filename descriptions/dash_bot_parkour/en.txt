@@ -1,3 +1,5 @@
+# Robot Labyrinth
+
 Note: This workshop will be held in the same format on Thursday and Friday. It's best to register for only one of the workshops so that tickets are available for others as well.
 
 In this workshop, we will bring the clever robot Dash to life!

@@ -1,3 +1,5 @@
+# Spiele entwickeln mit Odyc.js
+
 In diesem Workshop lernst du mittels Odyc.js deine ersten Schritte in die Welt der Programmierung zu setzen.
 
 Ablauf:

@@ -1,3 +1,5 @@
+# Your own Minecraft
+
 In this workshop you will get to know the Lua programming language - in a playful way with Luanti, a game similar to Minecraft.
 Here you can create your own worlds, place blocks and bring them to life with code!
 

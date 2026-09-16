@@ -1,3 +1,5 @@
+# Scratch World Map
+
 In this workshop, we will look at what makes different countries different and build a common world map in Scratch.
 You will program a description for a country of your choice. At the end, everything will be put together.
 

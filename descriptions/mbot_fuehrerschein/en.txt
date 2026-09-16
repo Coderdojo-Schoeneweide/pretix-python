@@ -1,3 +1,5 @@
+# MBot Driving School
+
 Welcome to the MBot Driving School!
 Here you will learn how to program your MBot to navigate traffic safely, intelligently, and independently.
 No prior knowledge is required.

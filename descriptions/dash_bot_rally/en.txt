@@ -1,3 +1,5 @@
+# Dash Bot Rally
+
 In this workshop, we bring the little Dash robot to life!
 Together we master exciting challenges and learn step-by-step how to program Dash. Whether an obstacle course, theater, or slingshot—you decide where the journey goes.
 You don't need any prior knowledge! Our mentors will support you through every challenge and show you how much fun robotics programming can be.

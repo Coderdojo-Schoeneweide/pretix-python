@@ -1,3 +1,5 @@
+# Animate story
+
 In this workshop, we’re blending the world of storytelling with the magic of code! We’ll take an exciting book as our template and divide the story among the group. Your mission: Pick a scene or a character and bring it to life using your favorite tool!
 You can use Scratch or, if you’re already an expert, feel free to use any other tool you prefer. At the end, we’ll put our pieces together and watch our digital book come to life!
 For children ages 7–17. No prior experience necessary.

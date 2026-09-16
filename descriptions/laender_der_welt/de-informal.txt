@@ -1,3 +1,5 @@
+# Scratch Weltkarte
+
 Bei diesem Workshop schauen wir uns an, was unterschiedliche Länder ausmacht und bauen eine gemeinsame Weltkarte in Scratch.
 Dabei programmiert ihr eine Beschreibung für ein Land, das ihr euch aussuchen könnt. Am Ende wird alles zusammengefügt.
 

@@ -1,3 +1,5 @@
+# Developing Games with Odyc.js
+
 In this workshop you will learn to take your first steps into the world of programming using Odyc.js.
 
 Process:

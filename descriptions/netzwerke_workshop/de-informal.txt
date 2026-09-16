@@ -1,3 +1,5 @@
+# Wie Computer miteinander sprechen
+
 In diesem Workshop lernen die Teilnehmenden auf praktische und spielerische Weise, wie Computer in einem lokalen Netzwerk miteinander kommunizieren.
 In kleinen Gruppen verbinden sie ihre Geräte über LAN oder WLAN, finden ihre eigenen IP-Adressen heraus und tauschen Dateien direkt über die Eingabeaufforderung aus. Dabei entsteht gemeinsam eine fortlaufende Geschichte, die von allen Gruppenmitgliedern ergänzt wird.
 Durch diesen Workshop verstehen die Teilnehmenden, wie Daten im Netzwerk übertragen werden, wie man Verbindungen überprüft und einfache Netzwerkprobleme erkennt. Gleichzeitig fördert sie Teamarbeit und technisches Verständnis im Umgang mit Netzwerken.

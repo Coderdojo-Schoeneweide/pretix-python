@@ -1,3 +1,5 @@
+# With Pixels and Sensors - Raspberry Pi
+
 In this workshop, we will bring the Raspberry Pi to life!
 Using the Sense Hat you will learn how to program your own pixel animations, flashing patterns, and funny icons.
 Step by step, we’ll show you how to control the bright lights using the Python programming language and make your own ideas shine on the display.

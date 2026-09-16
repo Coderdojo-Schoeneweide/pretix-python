@@ -1,3 +1,5 @@
+# MBot Labyrinth
+
 This workshop is all about robots, logic, and fun challenges! Using the small learning robots called mBot, we’ll program clever strategies to navigate through a maze.
 You’ll discover how sensors work, how to give basic commands, and how to solve problems step by step – in a playful and creative way!
 

@@ -1,3 +1,5 @@
+# Kreatives Coden mit Python
+
 In diesem Workshop lernst du eine der beliebtesten Programmiersprachen der Welt kennen: Python! Mit Hilfe von Jupyter Notebooks programmieren wir direkt im Browser – Schritt für Schritt und ganz ohne komplizierte Installation.
 
 Du erfährst, wie man mit Python rechnet, kleine Programme schreibt und einfache Rätsel löst. Vielleicht bringst du sogar deine eigenen Ideen mit!

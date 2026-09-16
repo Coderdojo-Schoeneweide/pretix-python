@@ -1,3 +1,5 @@
+# Kreatives Coden mit Python
+
 In diesem Workshop schauen wir uns an, wie man mit dem Computer Musik programmiert, Bilder malt oder kleine virtuelle Roboter steuert.
 
 Da wir direkt mit Text-Code arbeiten, ist dieser Workshop ideal für dich, wenn du schon erste Erfahrungen gesammelt hast – zum Beispiel mit Scratch oder anderen Plattformen. Wir helfen dir natürlich!

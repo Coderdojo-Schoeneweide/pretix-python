@@ -1,3 +1,5 @@
+# How Computers Communicate with Each Other
+
 In this workshop, participants learn in a practical and playful way how computers communicate with each other in a local network.
 In small groups, they connect their devices via LAN or WLAN, find out their own IP addresses, and exchange files directly via the command prompt. In the process, they jointly create a continuous story that is added to by all group members.
 Through this workshop, participants will understand how data is transferred within a network, how to check connections, and how to identify simple network problems. At the same time, it promotes teamwork and technical understanding in dealing with networks.

@@ -1,3 +1,5 @@
+# Mit KI zur eigenen Webseite
+
 In diesem Workshop lernst du, wie man heute Webseiten baut – mit smarter Unterstützung von KI! Gemeinsam nutzen wir OpenCode und sogenannte Agentic-Coding-Tools, die dir wie ein digitaler Assistent beim Schreiben und Gestalten von Code helfen. Wir zeigen dir, wie du deine Ideen in einer eigenen Webseite umsetzt, Bilder und Texte einbindest und die KI für dich tüfteln lässt.
 Vorkenntnisse sind nicht nötig – Neugier und Spaß am Ausprobieren reichen völlig aus. Unsere Mentor:innen unterstützen dich bei jedem Schritt!
 

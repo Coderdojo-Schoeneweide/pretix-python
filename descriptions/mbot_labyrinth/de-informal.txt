@@ -1,3 +1,5 @@
+# MBot Labyrinth
+
 In diesem Workshop dreht sich alles um Roboter und spannende Herausforderungen!
 Mit den kleinen Lernrobotern mBot programmieren wir clevere Strategien, um ein Labyrinth zu durchqueren.
 Dabei lernst du, wie Sensoren funktionieren, wie man einfache Befehle gibt und wie man Probleme Schritt für Schritt löst – ganz spielerisch und kreativ!

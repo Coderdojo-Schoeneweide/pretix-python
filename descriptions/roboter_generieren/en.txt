@@ -1,3 +1,5 @@
+# Painting Pictures with Code
+
 In this workshop, you will become a digital creator. Using the JavaScript programming language and the creative platform OpenProcessing, we will bring your very own robot avatar to life.
 
 Together, we’ll explore how to combine geometric shapes, cool colors, and a bit of code magic to design unique robot faces. The best part? You’ll learn the basics of programming along the way!

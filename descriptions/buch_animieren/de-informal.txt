@@ -1,3 +1,5 @@
+# Geschichte animieren
+
 In diesem Workshop verbinden wir die Welt der Geschichten mit der Magie des Codes! Wir nehmen ein spannendes Buch als Vorlage und teilen die Handlung unter uns auf. Deine Aufgabe: Such dir eine Szene oder einen Charakter aus und erwecke sie mit einem Tool deiner Wahl zum Leben!
 Du kannst Scratch nutzen oder, wenn du schon Profi bist, auch ein anderes Tool deiner Wahl ausprobieren. Am Ende setzen wir unsere Teile zusammen und schauen uns unser digitales Buch gemeinsam an!
 Für Kinder zwischen 7-17 Jahren. Keine Vorkenntnisse nötig.

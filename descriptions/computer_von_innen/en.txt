@@ -1,3 +1,5 @@
+# Inside the computer
+
 What actually happens inside a computer?
 In this workshop, we'll take a closer look at how a computer works :)
 

@@ -1,3 +1,5 @@
+# Build Games Like the Pros
+
 Would you like to develop your own 2D game? In this workshop, you’ll learn about the Godot game engine! Together, we’ll build a classic platformer with jumping characters, obstacles, and custom levels.
 Some programming experience (e.g., with Scratch or another language) is very helpful! Suitable for children ages 10 and up.
 

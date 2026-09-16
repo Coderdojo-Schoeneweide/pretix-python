@@ -1,3 +1,5 @@
+# Minecraft mit MCreator
+
 In diesem Workshop lernen Kinder ab 9 Jahren, wie sie ihre eigene kleine Mod für Minecraft erstellen – ganz ohne Programmiererfahrung!
 Mit MCreator nutzen wir einfache Code-Blöcke, um neue Gegenstände, Kreaturen oder Spielmechaniken zu erschaffen. Das Ganze funktioniert visuell und spielerisch.
 MCreator ist auf Englisch – darum sind ein bisschen Englischkenntnisse oder die Unterstützung durch Eltern hilfreich.
