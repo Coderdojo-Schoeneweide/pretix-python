@@ -1,0 +1,16 @@
+# KI verstehen
+
+Wir werfen einen Blick hinter die Kulissen von Künstlicher Intelligenz! Du lernst, wie Computer Bilder "sehen" und verstehen können.
+Gemeinsam trainieren und verwenden wir eine kleine KI, die verschiedene Gegenstände oder Handzeichen unterscheiden kann.
+
+Keine Vorkenntnisse erforderlich.
+
+Eine Veranstaltung der Stadtbibliothek Treptow-Köpenick in Kooperation mit dem CoderDojo Schöneweide e.V. im Rahmen der Veranstaltungsreihe „KI verstehen“.
+
+{devices}
+
+Barrierefreiheit: Alle Bereiche der Mittelpunktbibliothek Treptow können Menschen mit eingeschränkter Beweglichkeit erreichen. Eine Blindenleisystem existiert nicht. Türen sind manchmal schwerfällig.
+Wir bieten unsere Workshops in der Regel auf Deutsch an (gesprochen und geschrieben). Fast alle Mentor:innen sprechen darüber hinaus Englisch.
+Bei Bedarf an weiteren Sprachen (z.B. Russisch, Arabisch) oder weiterer Unterstützung (z.B. Screenreader), gebt uns Bescheid. Wir versuchen, allen den Zugang zu unseren Workshops zu ermöglichen.
+
+Wer möchte kann auch sehr gerne etwas kleines zu Essen/Trinken mitbringen. Wir versuchen immer ein kleines Buffet zu ermöglichen.
