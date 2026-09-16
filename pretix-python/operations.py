@@ -57,7 +57,7 @@ def change_location(client: Client, event: Event):
     if choice == len(choices) - 1:
         print('canceled')
         sys.exit(1)
-    location = locations[choice]
+    location = locations[choices[choice]]
     client.update_event_location(event, location)
 
 
