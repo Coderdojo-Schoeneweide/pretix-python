@@ -55,7 +55,7 @@ def main():
     desc = {lang: desc for lang, (_, desc) in title_and_desc.items()}
     client.patch_event_settings(new_event, {'frontpage_text': desc})
     if any(title.values()):
-        client.update_event_title(title)
+        client.update_event_title(new_event, title)
 
     # change available date from latecomer tickets
     try:
