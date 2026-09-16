@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 import os
 import sys
-from typing import Dict
 
 from simple_term_menu import TerminalMenu
 
 from client import Client
-from descriptions import DescriptionLoader
-from events import NewEventInfo, Event
+from descriptions import DescriptionLoader, split_title
+from events import NewEventInfo
 from lang import Lang
-from utils import previous_weekday, choice_to_int
-from devices import set_devices, update_devices
+from utils import previous_weekday, choice_to_int, for_multilang
+from devices import update_devices
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,7 +31,7 @@ def main():
         return
     template_event = last_n_events[entry_select]
 
-    # ask new data from user
+    # ask for new data from user
     info = NewEventInfo.from_user_input(template_event.name)
     new_event = client.clone_event(info, template_event)
 
@@ -48,9 +47,15 @@ def main():
         return
     description = description_loader.descriptions[options[entry_select]]
 
-    # add needed devices for workshop to description
+    # add necessary devices for workshop to description
     updated_desc = update_devices(description)
-    client.patch_event_settings(new_event, {'frontpage_text': updated_desc})
+
+    title_and_desc = for_multilang(updated_desc, split_title)
+    title = {lang: title for lang, (title, _) in title_and_desc.items()}
+    desc = {lang: desc for lang, (_, desc) in title_and_desc.items()}
+    client.patch_event_settings(new_event, {'frontpage_text': desc})
+    if any(title.values()):
+        client.update_event_title(title)
 
     # change available date from latecomer tickets
     try:
@@ -61,7 +66,7 @@ def main():
         client.patch_product(new_event, latecomer_ticket, {'available_from': wednesday_before.isoformat()})
     except StopIteration:
         # if no latecomer ticket is available
-        print("No latecomer ticket found. Failed to set availabilty date", file=sys.stderr)
+        print("No latecomer ticket found. Failed to set availability date", file=sys.stderr)
 
 
 if __name__ == '__main__':

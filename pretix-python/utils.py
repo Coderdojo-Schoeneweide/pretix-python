@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Callable, Dict, Any, Optional, List, Tuple
+from typing import Callable, Dict, Any, Optional, List, Tuple, TypeVar
 import string
 
 from simple_term_menu import TerminalMenu
@@ -11,7 +11,7 @@ def _convert_if_match(key, value, converter: Dict[str, Callable[[Any], Any]]):
     return converter[key](value) if key in converter else value
 
 
-def fromisoformat_or_none(datetime_string: str) -> Optional[datetime]:
+def fromisoformat_or_none(datetime_string: str | None) -> Optional[datetime]:
     if datetime_string is None:
         return None
     return datetime.fromisoformat(datetime_string)
@@ -77,3 +77,8 @@ def has_format_placeholder(fmt_string: str, key: str) -> bool:
         field_name == key
         for _, field_name, _, _ in string.Formatter().parse(fmt_string)
     )
+
+T = TypeVar('T')
+
+def for_multilang(lang_dict: Dict[str, str], func: Callable[[str], T]) -> Dict[str, T]:
+    return {lang: func(value) for lang, value in lang_dict.items()}

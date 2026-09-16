@@ -1,5 +1,6 @@
 import os
-from typing import Dict, List
+import re
+from typing import Dict, List, Tuple
 
 
 def _normalize_description(description: str) -> str:
@@ -28,5 +29,37 @@ class DescriptionLoader:
 
         return DescriptionLoader(descriptions)
 
-    def get_descriptions(self) -> List[str]:
+    def get_title(self, description: str) -> Dict[str, str | None]:
+        res = {}
+        for lang, desc in self.descriptions[description].items():
+            title, _ = split_title(desc)
+            res[lang] = title
+
+        return res
+
+    def get_description(self, description: str) -> Dict[str, str]:
+        res = {}
+        for lang, desc in self.descriptions[description].items():
+            _, desc = split_title(desc)
+            res[lang] = desc
+
+        return res
+
+    def list_descriptions(self) -> List[str]:
         return list(self.descriptions.keys())
+
+
+def split_title(text: str) -> Tuple[str | None, str]:
+    if not text:
+        return None, ""
+
+    lines = text.splitlines(keepends=True)
+    first_line = lines[0].strip()
+
+    match = re.match(r"^#+\s*(.+)$", first_line)
+    if match:
+        title = match.group(1).strip()
+        body = "".join(lines[1:]).strip()
+        return title, body
+
+    return None, text.strip()

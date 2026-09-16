@@ -121,13 +121,16 @@ class Client:
     def get_event_settings(self, event_slug: Union[str, Event], num_pages: int = -1) -> Dict[str, Any]:
         if isinstance(event_slug, Event):
             event_slug = event_slug.slug
-        event_data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings', num_pages)
-        return event_data
+        return self._get(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings', num_pages)
 
     def patch_event_settings(self, event_slug: Union[str, Event], patch_data: Dict[str, Any]):
         if isinstance(event_slug, Event):
             event_slug = event_slug.slug
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings/', patch_data)
+
+    def update_event_title(self, event: Event | str, title: Dict[str, str]):
+        event = event.slug if isinstance(event, Event) else event
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'name': title})
 
     def _create_event(self, event_data) -> Event:
         return Event(
