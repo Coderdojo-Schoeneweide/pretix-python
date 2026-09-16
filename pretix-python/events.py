@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Dict, Optional, Any
+# noinspection unused-imports
+import readline
 
 from lang import Lang
 from utils import get_from_lang, user_choose_date

@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime, timedelta
 from typing import Callable, Dict, Any, Optional, List, Tuple
 import string
@@ -36,7 +37,7 @@ def previous_weekday(dt: datetime, weekday: int) -> datetime:
     return dt - timedelta(days=(dt.weekday() - weekday) % 7 + (7 if dt.weekday() == weekday else 0))
 
 
-def user_choose_date(dates: List[datetime], title: str | None = None) -> Optional[datetime]:
+def user_choose_date(dates: List[datetime], title: str | None = None) -> datetime:
     if title is None:
         title = 'Choose date'
     options = [d.strftime("%a. %d.%m.%Y, %H:%M Uhr") for d in dates]
@@ -45,7 +46,7 @@ def user_choose_date(dates: List[datetime], title: str | None = None) -> Optiona
     menu = TerminalMenu(options, title=title, clear_menu_on_exit=False)
     menu_entry_index = choice_to_int(menu.show())
     if menu_entry_index == len(options) - 1:
-        return None
+        sys.exit(1)
     if menu_entry_index == len(options) - 2:
         while True:
             user_input = input('enter date (eg 24.12.2025 11:00): ')
@@ -56,6 +57,7 @@ def user_choose_date(dates: List[datetime], title: str | None = None) -> Optiona
                 continue
     else:
         return dates[menu_entry_index]
+    raise Exception('invalid menu entry')
 
 
 def choice_to_int(choice: int | Tuple[int, ...] | None) -> int:
