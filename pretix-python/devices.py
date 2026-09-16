@@ -38,8 +38,12 @@ def set_devices(device_list: Iterable[str], description: Dict[str, str]) -> Dict
     updated_description = {}
 
     # Text that is going to be added based on the devices
-    de_text = "### Das brauchst du:\nEin Gerät zum Programmieren (" + ", ".join(device_list) + "). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
-    en_text = "### What you need:\nA device for programming (" + ", ".join(device_list) + "). If you don't have one, book an additional computer product or write to us. We'll find a solution!"
+    if device_list == ['Laptop']:
+        de_text = "### Das brauchst du:\nEinen Laptop zum Programmieren. Falls du keinen hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
+        en_text = "### What you need:\nA laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!"
+    else:
+        de_text = "### Das brauchst du:\nEin Gerät zum Programmieren (" + ", ".join(device_list) + "). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
+        en_text = "### What you need:\nA device for programming (" + ", ".join(device_list) + "). If you don't have one, book an additional computer product or write to us. We'll find a solution!"
 
     for lang, text in description.items():
         if lang.startswith("de"):
