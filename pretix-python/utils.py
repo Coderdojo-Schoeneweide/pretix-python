@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Callable, Dict, Any, Optional, List, Tuple, TypeVar
+from typing import Callable, Dict, Any, Optional, List, Tuple
 import string
 
 from simple_term_menu import TerminalMenu
@@ -77,8 +77,3 @@ def has_format_placeholder(fmt_string: str, key: str) -> bool:
         field_name == key
         for _, field_name, _, _ in string.Formatter().parse(fmt_string)
     )
-
-T = TypeVar('T')
-
-def for_multilang(lang_dict: Dict[str, str], func: Callable[[str], T]) -> Dict[str, T]:
-    return {lang: func(value) for lang, value in lang_dict.items()}

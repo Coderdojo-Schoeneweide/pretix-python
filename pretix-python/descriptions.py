@@ -2,6 +2,8 @@ import os
 import re
 from typing import Dict, List, Tuple
 
+from lang import for_multilang
+
 
 def _normalize_description(description: str) -> str:
     return description.replace('\n', '\r\n').replace('ö', '\u00f6').replace('ü', '\u00fc').replace('ä', '\u00e4').replace('ß', '\u00df')
@@ -63,3 +65,9 @@ def split_title(text: str) -> Tuple[str | None, str]:
         return title, body
 
     return None, text.strip()
+
+
+def ensure_title(title: Dict[str, str | None]) -> Dict[str, str]:
+    def _ensure_title(t: str | None):
+        return t or 'TODO: Workshop Title'
+    return for_multilang(title, _ensure_title)
