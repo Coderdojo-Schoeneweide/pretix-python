@@ -1,0 +1,16 @@
+# Spiele programmieren mit KI
+
+Wie funktioniert Künstliche Intelligenz eigentlich wirklich? In diesem Workshop finden wir es heraus und entwickeln mit dem Tool OpenCode schnell und einfach unser ganz eigenes Spiel!
+
+Zuerst schlüpfen wir selbst in die Rolle einer KI und erfahren, warum genaue Anweisungen so wichtig sind.
+Danach testen wir dein Wissen in einem kurzen KI-Quiz, bevor es an das eigene Game geht: Schritt für Schritt bringen wir deinen Code zum Laufen.
+
+Vorkenntnisse sind nicht nötig. Unsere Mentor:innen unterstützen dich bei jedem Schritt! Neugierig? Dann komm vorbei und lass deine Ideen Wirklichkeit werden!
+
+{devices}
+
+Barrierefreiheit: Alle Bereiche der Mittelpunktbibliothek Treptow können Menschen mit eingeschränkter Beweglichkeit erreichen. Eine Blindenleisystem existiert nicht. Türen sind manchmal schwerfällig.
+Wir bieten unsere Workshops in der Regel auf Deutsch an (gesprochen und geschrieben). Fast alle Mentor:innen sprechen darüber hinaus Englisch.
+Bei Bedarf an weiteren Sprachen (z.B. Russisch, Arabisch) oder weiterer Unterstützung (z.B. Screenreader), gebt uns Bescheid. Wir versuchen, allen den Zugang zu unseren Workshops zu ermöglichen.
+
+Wer möchte kann auch sehr gerne etwas kleines zu Essen/Trinken mitbringen. Wir versuchen immer ein kleines Buffet zu ermöglichen.
