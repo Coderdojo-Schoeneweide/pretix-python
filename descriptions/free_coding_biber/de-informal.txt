@@ -3,9 +3,7 @@
 Beim freien Coden können Kinder und Jugendliche ihre eigenen Projekte mitbringen und diese mit der Unterstützung unserer Mentor:innen bearbeiten.
 Du hast noch keine Idee? Kein Problem wir bringen Inspiration mit :) Vorkenntnisse werden nicht benötigt.
 
-Für Kinder ab der 3. Klasse: Außerdem bereiten wir den [Informatik-Biber](https://bwinf.de/biber/2026/) Wettbewerb vor.
-Bei diesem Wettbewerb geht es um Logik-Rätsel. Wer möchte, kann während dem Freien Coden für den Wettbewerb üben.
-Am Wettbewerb können Kinder und Jugendliche beim CoderDojo am 14.11. gemeinsam teilnehmen.
+Für Kinder ab der 3. Klasse: Außerdem könnt ihr am [Informatik-Biber](https://bwinf.de/biber/2026/) Wettbewerb teilnehmen, bei dem es um kleine Logik-Rätsel geht.
 
 Ablauf:
 10:50 - 11:00 - Einlass
