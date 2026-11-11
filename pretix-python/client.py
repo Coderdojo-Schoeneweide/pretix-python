@@ -1,6 +1,8 @@
 import enum
 import os
 import sys
+import time
+from pathlib import Path
 from typing import List, Optional, Any, Dict, Union, Tuple
 from urllib.parse import urljoin
 
@@ -163,3 +165,54 @@ class Client:
         event = event.slug if isinstance(event, Event) else event
         product = product.id if isinstance(product, Product) else product
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/items/{product}/', patch_data)
+
+    # shredders
+    def get_shredders(self, event: Event | str) -> List[Dict[str, str]]:
+        event = event.slug if isinstance(event, Event) else event
+        return self._get(f'/api/v1/organizers/{self.organizer}/events/{event}/shredders/')
+
+    def start_shredder_export(self, event: Event | str, shredders: List[str]) -> Dict[str, str]:
+        """Starts the export of the data to be shredded. Returns dict with 'download' and 'shred' urls."""
+        event = event.slug if isinstance(event, Event) else event
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event}/shredders/export/'
+        url = urljoin(self.pretix_domain, endpoint)
+        r = requests.post(url, headers=self._post_headers(), json={'shredders': shredders})
+        if r.status_code == 400:
+            raise RuntimeError(f'Export failed: {r.text}')
+        r.raise_for_status()
+        return r.json()
+
+    def _poll(self, method: str, url: str, timeout: float = 600.0) -> requests.Response:
+        """Repeats the request while the server answers with 409 (running/waiting)."""
+        start = time.monotonic()
+        while True:
+            r = requests.request(method, url, headers=self._post_headers())
+            if r.status_code != 409:
+                return r
+            if time.monotonic() - start > timeout:
+                raise TimeoutError(f'Timed out waiting for {url}')
+            time.sleep(2)
+
+    def download_shredder_export(self, download_url: str, target_path: Path):
+        r = self._poll('GET', download_url)
+        if r.status_code != 200:
+            raise RuntimeError(f'Export download failed ({r.status_code}): {r.text}')
+        with open(target_path, 'wb') as f:
+            f.write(r.content)
+
+    def shred(self, shred_url: str):
+        """Executes the shredding and waits for it to finish."""
+        if self.read_only:
+            print(f'dry post {shred_url}')
+            return
+        r = self._poll('POST', shred_url)
+        if r.status_code != 202:
+            raise RuntimeError(f'Starting shredder failed ({r.status_code}): {r.text}')
+        status_url = r.json()['status']
+        r = self._poll('GET', status_url)
+        if r.status_code == 200:
+            return
+        if r.status_code == 410:
+            print('Shredder status unknown to server (likely finished).', file=sys.stderr)
+            return
+        raise RuntimeError(f'Shredding failed ({r.status_code}): {r.text}')
