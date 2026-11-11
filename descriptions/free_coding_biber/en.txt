@@ -3,9 +3,7 @@
 At our Free Coding event, kids and teens can bring their own projects and work on them with the support of our mentors.
 You don't have an idea yet? No problem, we bring inspiration :) Previous knowledge is not required.
 
-For kids from grade 3: We’re also preparing for the [Informatik-Biber](https://bwinf.de/biber/2026/) competition.
-The competition is about solving logical puzzles. Anyone who’d like to can practice for the competition during the “Free Coding” session.
-Children and teens can participate in the competition together at CoderDojo on November 14.
+For kids in 3rd grade and up: You can also take part in the [Informatik-Biber](https://bwinf.de/biber/2026/) competition, which features short logic puzzles.
 
 Schedule:
 10:50 - 11:00 - Admission
