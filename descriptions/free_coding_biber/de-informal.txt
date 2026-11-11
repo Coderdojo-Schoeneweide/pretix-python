@@ -1,0 +1,24 @@
+# Freies Coden & Training für den "Informatik-Biber"-Wettbewerb
+
+Beim freien Coden können Kinder und Jugendliche ihre eigenen Projekte mitbringen und diese mit der Unterstützung unserer Mentor:innen bearbeiten.
+Du hast noch keine Idee? Kein Problem wir bringen Inspiration mit :) Vorkenntnisse werden nicht benötigt.
+
+Für Kinder ab der 3. Klasse: Außerdem bereiten wir den [Informatik-Biber](https://bwinf.de/biber/2026/) Wettbewerb vor.
+Bei diesem Wettbewerb geht es um Logik-Rätsel. Wer möchte, kann während dem Freien Coden für den Wettbewerb üben.
+Am Wettbewerb können Kinder und Jugendliche beim CoderDojo am 14.11. gemeinsam teilnehmen.
+
+Ablauf:
+10:50 - 11:00 - Einlass
+11:00 - 11:15 - Begrüßung & Ice-Breaker & Setup
+11.15 - 12.45 - Programmieren
+12.45 - 13.00 - Show-Time: Wer hat heute was gemacht?
+
+{devices}
+
+Falls du unter 13 Jahren alt bist: Eine:n Erziehungsberechtigte:n, die oder der dich während des Dojos begleitet. Die erziehungsberechtigte Person braucht ebenfalls ein eigenes Ticket. Falls es die von eurer Familie benötigte Kombination an Tickets nicht mehr gibt, schreib uns einfach und wir schauen ob wir eine Lösung finden.
+
+Barrierefreiheit: Alle Bereiche der Mittelpunktbibliothek Treptow können Menschen mit eingeschränkter Beweglichkeit erreichen. Eine Blindenleisystem existiert nicht. Türen sind manchmal schwerfällig.
+Wir bieten unsere Workshops in der Regel auf Deutsch an (gesprochen und geschrieben). Fast alle Mentor:innen sprechen darüber hinaus Englisch.
+Bei Bedarf an weiteren Sprachen (z.B. Russisch, Arabisch) oder weiterer Unterstützung (z.B. Screenreader), gebt uns Bescheid. Wir versuchen, allen den Zugang zu unseren Workshops zu ermöglichen.
+
+Wer möchte kann auch sehr gerne etwas kleines zu Essen/Trinken mitbringen. Wir versuchen immer ein kleines Buffet zu ermöglichen.
