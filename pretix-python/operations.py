@@ -1,6 +1,7 @@
 import json
 import sys
 from datetime import datetime, timedelta
+from pathlib import Path
 
 from simple_term_menu import TerminalMenu
 
@@ -10,6 +11,8 @@ from devices import update_devices
 from events import Event, NewEventInfo
 from lang import Lang, for_multilang
 from utils import choice_to_int, get_single_choice
+
+EXPORT_PATH_BASE = Path('./shred_export')
 
 
 def choose_event(client: Client) -> Event:
@@ -84,3 +87,49 @@ def create_new_event(client: Client):
 
     # change available date from latecomer tickets
     update_latecomer_avail_date(client, event, info.date_from)
+
+
+def shred_past_event(client: Client):
+    now = datetime.now().astimezone()
+    past_events = [e for e in client.get_events() if e.date_to.astimezone() < now][-15:][::-1]
+    if not past_events:
+        print('no past events found')
+        return
+    options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in past_events]
+    options.append('[c] cancel')
+    choice = get_single_choice('Choose past event to shred', options)
+    if choice == len(options) - 1:
+        print('cancelled')
+        return
+    event = past_events[choice]
+
+    shredders = client.get_shredders(event)
+    if not shredders:
+        print('no shredders available')
+        return
+    menu = TerminalMenu(
+        [s['verbose_name'] for s in shredders], title='Choose data to shred (space to toggle, enter to confirm)',
+        multi_select=True, show_multi_select_hint=True, preselected_entries=list(range(len(shredders))),
+        multi_select_select_on_accept=False, clear_menu_on_exit=False,
+    )
+    selected = menu.show()
+    if not selected:
+        print('cancelled')
+        return
+    identifiers = [shredders[i]['identifier'] for i in selected]
+
+    print('starting export...')
+    urls = client.start_shredder_export(event, identifiers)
+    export_path = EXPORT_PATH_BASE / f'shredder_export_{event.slug}.zip'
+    EXPORT_PATH_BASE.mkdir(parents=True, exist_ok=True)
+    print('waiting for export...')
+    client.download_shredder_export(urls['download'], export_path)
+    print(f'export saved to {export_path}')
+
+    confirm = input(f'Really delete personal data of "{event.slug}"? This can not be undone. Type the slug to confirm: ')
+    if confirm.strip() != event.slug:
+        print('cancelled')
+        return
+    print('shredding...')
+    client.shred(urls['shred'])
+    print('done')
