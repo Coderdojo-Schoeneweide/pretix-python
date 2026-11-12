@@ -1,4 +1,5 @@
 import json
+from typing import List
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -91,21 +92,40 @@ def create_new_event(client: Client):
 
 def shred_past_events(client: Client):
     now = datetime.now().astimezone()
-    past_events = [e for e in client.get_events() if e.date_to.astimezone() < now][-30:][::-1]
+    past_events = [e for e in client.get_events() if e.date_to.astimezone() < now][::-1]
     if not past_events:
         print('no past events found')
         return
-    options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in past_events]
-    menu = TerminalMenu(
-        options, title='Choose past events to shred (space to toggle, enter to confirm)',
-        multi_select=True, show_multi_select_hint=True, multi_select_select_on_accept=False,
-        clear_menu_on_exit=False,
-    )
-    selected = menu.show()
-    if not selected:
-        print('cancelled')
-        return
-    events = [past_events[i] for i in selected]
+
+    page_size = 30
+    num_shown = page_size
+    preselected: List[int] = []
+    cursor = 0
+    while True:
+        shown = past_events[:num_shown]
+        options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in shown]
+        has_more = num_shown < len(past_events)
+        if has_more:
+            options.append('[+] load older events')
+        menu = TerminalMenu(
+            options, title='Choose past events to shred (space to toggle, enter to confirm)',
+            multi_select=True, show_multi_select_hint=True, multi_select_select_on_accept=False,
+            preselected_entries=preselected or None, cursor_index=cursor,
+            clear_menu_on_exit=False,
+        )
+        selected = menu.show()
+        if not selected:
+            print('cancelled')
+            return
+        load_more_index = len(shown)
+        if has_more and load_more_index in selected:
+            # keep current selection and show more events
+            preselected = [i for i in selected if i != load_more_index]
+            cursor = load_more_index
+            num_shown += page_size
+            continue
+        break
+    events = [shown[i] for i in selected]
 
     # collect available shredders of all selected events
     event_shredders = {e.slug: client.get_shredders(e) for e in events}
@@ -138,6 +158,10 @@ def shred_past_events(client: Client):
             print(f'{event.slug}: nothing to shred, skipping')
             continue
         try:
+            if event.live:
+                print(f'{event.slug}: taking ticket shop offline...')
+                client.set_event_live(event, False)
+                event.live = False
             print(f'{event.slug}: exporting...')
             urls = client.start_shredder_export(event, event_identifiers)
             export_path = EXPORT_PATH_BASE / f'shredder_export_{event.slug}.zip'

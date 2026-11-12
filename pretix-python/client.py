@@ -216,3 +216,7 @@ class Client:
             print('Shredder status unknown to server (likely finished).', file=sys.stderr)
             return
         raise RuntimeError(f'Shredding failed ({r.status_code}): {r.text}')
+
+    def set_event_live(self, event: Event | str, live: bool):
+        event = event.slug if isinstance(event, Event) else event
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'live': live})
