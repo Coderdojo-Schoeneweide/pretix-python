@@ -6,14 +6,14 @@ from simple_term_menu import TerminalMenu
 
 from client import Client
 from lang import Lang
-from operations import create_new_event, choose_event, change_description, change_location, shred_past_event
+from operations import create_new_event, choose_event, change_description, change_location, shred_past_events
 from utils import choice_to_int
 
 load_dotenv()
 
 
 def main():
-    options = ['Create Event', 'Change Description', 'Change Location', 'Shred Past Event', 'Cancel']
+    options = ['Create Event', 'Change Description', 'Change Location', 'Shred Past Events', 'Cancel']
     menu = TerminalMenu(options, title='What do you want to do?', clear_menu_on_exit=False)
     choice = choice_to_int(menu.show())
 
@@ -30,7 +30,7 @@ def main():
         change_location(client, event)
     elif choice == 3:
         client = create_client()
-        shred_past_event(client)
+        shred_past_events(client)
 
 
 

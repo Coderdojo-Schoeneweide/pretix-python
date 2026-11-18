@@ -1,4 +1,5 @@
 import json
+from typing import List
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -12,7 +13,7 @@ from events import Event, NewEventInfo
 from lang import Lang, for_multilang
 from utils import choice_to_int, get_single_choice
 
-EXPORT_PATH_BASE = Path('./shred_export')
+EXPORT_PATH_BASE = Path('shred_export')
 
 
 def choose_event(client: Client) -> Event:
@@ -89,47 +90,101 @@ def create_new_event(client: Client):
     update_latecomer_avail_date(client, event, info.date_from)
 
 
-def shred_past_event(client: Client):
+def shred_past_events(client: Client):
     now = datetime.now().astimezone()
-    past_events = [e for e in client.get_events() if e.date_to.astimezone() < now][-15:][::-1]
+    past_events = [e for e in client.get_events() if e.date_to.astimezone() < now][::-1]
     if not past_events:
         print('no past events found')
         return
-    options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in past_events]
-    options.append('[c] cancel')
-    choice = get_single_choice('Choose past event to shred', options)
-    if choice == len(options) - 1:
-        print('cancelled')
-        return
-    event = past_events[choice]
 
-    shredders = client.get_shredders(event)
-    if not shredders:
+    page_size = 30
+    num_shown = page_size
+    preselected: List[int] = []
+    cursor = 0
+    while True:
+        shown = past_events[:num_shown]
+        options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr"), e.slug) for e in shown]
+        has_more = num_shown < len(past_events)
+        if has_more:
+            options.append('[+] load older events')
+        menu = TerminalMenu(
+            options, title='Choose past events to shred (space to toggle, enter to confirm)',
+            multi_select=True, show_multi_select_hint=True, multi_select_select_on_accept=False,
+            preselected_entries=preselected or None, cursor_index=cursor,
+            clear_menu_on_exit=False,
+        )
+        selected = menu.show()
+        if not selected:
+            print('cancelled')
+            return
+        load_more_index = len(shown)
+        if has_more and load_more_index in selected:
+            # keep current selection and show more events
+            preselected = [i for i in selected if i != load_more_index]
+            cursor = load_more_index
+            num_shown += page_size
+            continue
+        break
+    events = [shown[i] for i in selected]
+
+    # collect available shredders of all selected events
+    event_shredders = {e.slug: client.get_shredders(e) for e in events}
+    all_shredders = {}
+    for shredders in event_shredders.values():
+        for s in shredders:
+            all_shredders.setdefault(s['identifier'], s['verbose_name'])
+    if not all_shredders:
         print('no shredders available')
         return
+    identifiers = list(all_shredders.keys())
     menu = TerminalMenu(
-        [s['verbose_name'] for s in shredders], title='Choose data to shred (space to toggle, enter to confirm)',
-        multi_select=True, show_multi_select_hint=True, preselected_entries=list(range(len(shredders))),
+        [all_shredders[i] for i in identifiers], title='Choose data to shred (space to toggle, enter to confirm)',
+        multi_select=True, show_multi_select_hint=True, preselected_entries=list(range(len(identifiers))),
         multi_select_select_on_accept=False, clear_menu_on_exit=False,
     )
     selected = menu.show()
     if not selected:
         print('cancelled')
         return
-    identifiers = [shredders[i]['identifier'] for i in selected]
+    chosen = [identifiers[i] for i in selected]
 
-    print('starting export...')
-    urls = client.start_shredder_export(event, identifiers)
-    export_path = EXPORT_PATH_BASE / f'shredder_export_{event.slug}.zip'
+    # export everything first, so nothing gets deleted before all data is saved
+    jobs = []
     EXPORT_PATH_BASE.mkdir(parents=True, exist_ok=True)
-    print('waiting for export...')
-    client.download_shredder_export(urls['download'], export_path)
-    print(f'export saved to {export_path}')
+    for event in events:
+        available = {s['identifier'] for s in event_shredders[event.slug]}
+        event_identifiers = [i for i in chosen if i in available]
+        if not event_identifiers:
+            print(f'{event.slug}: nothing to shred, skipping')
+            continue
+        try:
+            if event.live:
+                print(f'{event.slug}: taking ticket shop offline...')
+                client.set_event_live(event, False)
+                event.live = False
+            print(f'{event.slug}: exporting...')
+            urls = client.start_shredder_export(event, event_identifiers)
+            export_path = EXPORT_PATH_BASE / f'shredder_export_{event.slug}.zip'
+            client.download_shredder_export(urls['download'], export_path)
+            print(f'{event.slug}: export saved to {export_path}')
+            jobs.append((event, urls['shred']))
+        except Exception as e:
+            print(f'{event.slug}: export failed, skipping: {e}', file=sys.stderr)
 
-    confirm = input(f'Really delete personal data of "{event.slug}"? This can not be undone. Type the slug to confirm: ')
-    if confirm.strip() != event.slug:
+    if not jobs:
+        print('nothing to shred')
+        return
+    print('\nEvents to shred:')
+    for event, _ in jobs:
+        print(f'  {event.slug}')
+    confirm = input('Really delete personal data of these events? This can not be undone. Type "yes" to confirm: ')
+    if confirm.strip().lower() != 'yes':
         print('cancelled')
         return
-    print('shredding...')
-    client.shred(urls['shred'])
-    print('done')
+    for event, shred_url in jobs:
+        try:
+            print(f'{event.slug}: shredding...')
+            client.shred(shred_url)
+            print(f'{event.slug}: done')
+        except Exception as e:
+            print(f'{event.slug}: shredding failed: {e}', file=sys.stderr)
