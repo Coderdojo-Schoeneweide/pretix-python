@@ -51,30 +51,35 @@ There are two ways to start the program:
 
 **Option 2: Directly with Python**
 ```bash
-PYTHONPATH=pretix-python ./tests/main.py
+PYTHONPATH=pretix-python python3 main.py
 ```
 
-### Workflow
+### Main Menu Options
 
-1. **Select Event Template**:
-   - The program displays the 10 most recent events
-   - Use arrow keys to select the event that should serve as a template
-   - Confirm with Enter
+- **Create Event**: Clone a template event and create a single event.
+- **Create Event Series**: Clone a template event as an event series (`has_subevents=True`) and add multiple sub-event dates (individually or recurring weekly).
+- **Add Sub-events to Series**: Add new sub-event dates to an existing event series.
+- **Change Description**: Update the frontpage text and title of an event or series.
+- **Change Location**: Change the venue location of an event.
+- **Shred Past Events**: Export and shred personal attendee data from past events.
 
-2. **Enter New Event Data**:
-   - **Event Name**: Enter the name for the new event (or press Enter to keep the same name)
-   - **Date**: Choose the date for the new event (suggestion: next Saturday)
-   - **Time**: Enter the start time (in HH:MM format)
-   - **Duration**: Enter the duration in hours
+### Creating an Event Series
 
-3. **Select Description**:
-   - The program shows all available description templates
-   - These are located in the `descriptions/` folder
-   - Choose the appropriate description for your event
+1. Select **Create Event Series** from the main menu.
+2. Choose a template event to copy settings, products, and categories from.
+3. Enter the series slug (e.g. `workshop-series-2026`).
+4. Choose how to configure dates:
+   - **Add dates individually**: Select start/end times for each date interactively and optionally set custom date names.
+   - **Create recurring weekly dates**: Choose the start date/time of the first session, enter the number of dates and the weekly interval.
+5. Choose a workshop description and required devices.
+6. The program creates the event series container and all sub-events on pretix, configuring quotas for each date and adjusting latecomer ticket availability.
 
-4. **Done**:
-   - The new event is created and automatically configured
-   - For events with latecomer tickets, availability is automatically set to the Wednesday before the event
+### Adding Sub-events to an Existing Series
+
+1. Select **Add Sub-events to Series** from the main menu.
+2. Select an existing event series from the list.
+3. Choose how to configure dates (individually or recurring weekly).
+4. The program adds the sub-events to the series on pretix, setting up quotas based on existing sub-event quotas and adjusting latecomer ticket availability.
 
 ### Managing Description Templates
 

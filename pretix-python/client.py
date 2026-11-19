@@ -2,6 +2,7 @@ import enum
 import os
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Any, Dict, Union, Tuple
 from urllib.parse import urljoin
@@ -9,7 +10,7 @@ from urllib.parse import urljoin
 from dotenv import load_dotenv
 import requests
 
-from events import Event, NewEventInfo
+from events import Event, NewEventInfo, SubEvent, NewSubEventInfo
 from lang import Lang
 from products import Product
 
@@ -103,7 +104,10 @@ class Client:
             return 0, None
         else:
             r = requests.post(url, headers=self._post_headers(), json=data)
-            r.raise_for_status()
+            try:
+                r.raise_for_status()
+            except requests.exceptions.HTTPError as e:
+                raise requests.exceptions.HTTPError(f"{e}\nResponse body: {r.text}", response=r) from e
             try:
                 response_data = r.json()
             except ValueError:
@@ -111,12 +115,18 @@ class Client:
             return r.status_code, response_data
 
     # events
-    def get_events(self, num_pages: int = -1, sort_by: SortKey = SortKey.Date) -> List[Event]:
-        event_data = self._get(f'/api/v1/organizers/{self.organizer}/events/', num_pages)
+    def get_events(
+            self, num_pages: int = -1, sort_by: SortKey = SortKey.Date,
+            has_subevents: Optional[bool] = None
+    ) -> List[Event]:
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/'
+        if has_subevents is not None:
+            endpoint += f'?has_subevents={"true" if has_subevents else "false"}'
+        event_data = self._get(endpoint, num_pages)
         events = [self._create_event(e) for e in event_data]
 
         if sort_by == SortKey.Date:
-            events.sort(key=lambda e: e.date_from)
+            events.sort(key=lambda e: e.date_from or datetime.min)
 
         return events
 
@@ -130,6 +140,10 @@ class Client:
             event_slug = event_slug.slug
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/settings/', patch_data)
 
+    def patch_event(self, event: Event | str, patch_data: Dict[str, Any]) -> Tuple[int, Any]:
+        event_slug = event.slug if isinstance(event, Event) else event
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/', patch_data)
+
     def update_event_title(self, event: Event | str, title: Dict[str, str]):
         event = event.slug if isinstance(event, Event) else event
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'name': title})
@@ -139,10 +153,19 @@ class Client:
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'location': location})
 
     def _create_event(self, event_data) -> Event:
+        if event_data is None:
+            return Event(
+                name={}, slug='dry-run', live=False,
+                date_from=None, date_to=None,
+                public_url='', location={}, has_subevents=False,
+                default_lang=self.default_lang
+            )
         return Event(
             name=event_data['name'], slug=event_data['slug'], live=event_data['live'],
-            date_from=event_data['date_from'], date_to=event_data['date_to'],
-            public_url=event_data['public_url'], location=event_data['location'], default_lang=self.default_lang
+            date_from=event_data.get('date_from'), date_to=event_data.get('date_to'),
+            public_url=event_data.get('public_url', ''), location=event_data.get('location', {}),
+            has_subevents=event_data.get('has_subevents', False),
+            default_lang=self.default_lang
         )
 
     def clone_event(self, info: NewEventInfo, template: Event) -> Event:
@@ -154,6 +177,81 @@ class Client:
         status_code, response_data = self._post(endpoint, data)
 
         return self._create_event(response_data)
+
+    # subevents
+    def get_subevents(self, event: Event | str, num_pages: int = -1) -> List[SubEvent]:
+        event_slug = event.slug if isinstance(event, Event) else event
+        subevent_data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/subevents/', num_pages)
+        return [SubEvent.from_dict(s, default_lang=self.default_lang) for s in subevent_data]
+
+    def get_subevent(self, event: Event | str, subevent_id: int) -> SubEvent:
+        event_slug = event.slug if isinstance(event, Event) else event
+        data = self._get(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/subevents/{subevent_id}/')
+        return SubEvent.from_dict(data, default_lang=self.default_lang)
+
+    def create_subevent(self, event: Event | str, subevent: Union[NewSubEventInfo, Dict[str, Any]]) -> SubEvent:
+        event_slug = event.slug if isinstance(event, Event) else event
+        data = subevent.to_data() if isinstance(subevent, NewSubEventInfo) else subevent
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/subevents/'
+        status_code, response_data = self._post(endpoint, data)
+        if response_data is None:
+            return SubEvent(
+                id=0, name=data.get('name', {}), event=event_slug,
+                active=data.get('active', False), is_public=data.get('is_public', True),
+                date_from=data['date_from'], date_to=data.get('date_to'),
+                default_lang=self.default_lang
+            )
+        return SubEvent.from_dict(response_data, default_lang=self.default_lang)
+
+    def patch_subevent(self, event: Event | str, subevent: Union[SubEvent, int], patch_data: Dict[str, Any]) -> Tuple[int, Any]:
+        event_slug = event.slug if isinstance(event, Event) else event
+        subevent_id = subevent.id if isinstance(subevent, SubEvent) else subevent
+        return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event_slug}/subevents/{subevent_id}/', patch_data)
+
+    def delete_subevent(self, event: Event | str, subevent: Union[SubEvent, int]):
+        event_slug = event.slug if isinstance(event, Event) else event
+        subevent_id = subevent.id if isinstance(subevent, SubEvent) else subevent
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/subevents/{subevent_id}/'
+        url = urljoin(self.pretix_domain, endpoint)
+        if self.read_only:
+            print(f'dry delete {url}')
+            return
+        r = requests.delete(url, headers=self._get_headers())
+        r.raise_for_status()
+
+    def update_subevent_name(self, event: Event | str, subevent: Union[SubEvent, int], name: Dict[str, str]):
+        return self.patch_subevent(event, subevent, {'name': name})
+
+    def update_subevent_location(self, event: Event | str, subevent: Union[SubEvent, int], location: Dict[str, str]):
+        return self.patch_subevent(event, subevent, {'location': location})
+
+    def set_subevent_active(self, event: Event | str, subevent: Union[SubEvent, int], active: bool):
+        return self.patch_subevent(event, subevent, {'active': active})
+
+    # quotas
+    def get_quotas(self, event: Event | str, subevent_id: Optional[int] = None, num_pages: int = -1) -> List[Dict[str, Any]]:
+        event_slug = event.slug if isinstance(event, Event) else event
+        if self.read_only and event_slug == 'dry-run':
+            return []
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/quotas/'
+        if subevent_id is not None:
+            endpoint += f'?subevent={subevent_id}'
+        return self._get(endpoint, num_pages)
+
+    def create_quota(self, event: Event | str, data: Dict[str, Any]) -> Tuple[int, Any]:
+        event_slug = event.slug if isinstance(event, Event) else event
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/quotas/'
+        return self._post(endpoint, data)
+
+    def delete_quota(self, event: Event | str, quota_id: int):
+        event_slug = event.slug if isinstance(event, Event) else event
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/quotas/{quota_id}/'
+        url = urljoin(self.pretix_domain, endpoint)
+        if self.read_only:
+            print(f'dry delete {url}')
+            return
+        r = requests.delete(url, headers=self._get_headers())
+        r.raise_for_status()
 
     # products
     def get_event_products(self, event: Event | str, num_pages: int = -1) -> List[Product]:
