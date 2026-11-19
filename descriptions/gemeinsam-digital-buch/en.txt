@@ -1,0 +1,17 @@
+# A Book Becomes a Game
+
+In this workshop series, we bring stories to life! We take a book as our template and program our own computer game from it step by step using Scratch.
+Together, we will develop characters, design exciting levels, and interactively turn the plot into code.
+Our mentors will support you every step of the way! No prior experience required.
+Important: This is a sequential workshop series. It is best if you attend all sessions so we can continuously work on our game together.
+Curious? Then come by and bring your imagination!
+
+Hosted by the Stadtbibliothek Treptow-Köpenick in cooperation with CoderDojo Schöneweide e.V. and the Remili Youth Club as part of the "Gemeinsam digital" (Digital Together) event series.
+
+{devices}
+
+Accessibility: All areas of the library in Schöneweide are accessible to people with limited mobility. There is no audio description system. Some doors can be difficult to open.
+We generally offer our workshops in German (spoken and written). Almost all mentors also speak English.
+If you need support in other languages (e.g., Russian, Arabic) or additional assistance (e.g., screen readers), please let us know. We strive to make our workshops accessible to everyone.
+
+You are also welcome to bring something small to eat/drink. We always try to provide a small buffet.
