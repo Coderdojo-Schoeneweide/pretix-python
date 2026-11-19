@@ -50,7 +50,7 @@ def choose_event(
 
 def change_description(client: Client, event: Event):
     description_loader = DescriptionLoader.from_dir()
-    options = list(description_loader.descriptions.keys())
+    options = list(description_loader.get_sorted_descriptions().keys())
     options.append('[c] cancel')
     menu = TerminalMenu(options, title='Choose description', clear_menu_on_exit=False)
     entry_select = choice_to_int(menu.show())

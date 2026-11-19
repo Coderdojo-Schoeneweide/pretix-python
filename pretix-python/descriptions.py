@@ -1,8 +1,12 @@
+from datetime import datetime
 import os
 import re
+from pathlib import Path
 from typing import Dict, List, Tuple
 
 from lang import for_multilang
+
+local_tz = datetime.now().astimezone().tzinfo
 
 
 def _normalize_description(description: str) -> str:
@@ -10,14 +14,15 @@ def _normalize_description(description: str) -> str:
 
 
 class DescriptionLoader:
-    def __init__(self, descriptions: Dict[str, Dict[str, str]]):
+    def __init__(self, descriptions: Dict[str, Dict[str, str]], root_dir: Path):
         self.descriptions = descriptions
+        self.root_dir = root_dir
 
     @staticmethod
-    def from_dir(dir_path: str = 'descriptions') -> "DescriptionLoader":
+    def from_dir(root_dir: Path = Path('descriptions')) -> "DescriptionLoader":
         descriptions = {}
-        for desc_name in os.listdir(dir_path):
-            desc_path = os.path.join(dir_path, desc_name)
+        for desc_name in os.listdir(root_dir):
+            desc_path = os.path.join(root_dir, desc_name)
             if os.path.isdir(desc_path):
                 lang_to_desc = {}
                 for lang in os.listdir(desc_path):
@@ -29,7 +34,7 @@ class DescriptionLoader:
                             lang_to_desc[lang_instance] = description_text
                 descriptions[desc_name] = lang_to_desc
 
-        return DescriptionLoader(descriptions)
+        return DescriptionLoader(descriptions, root_dir)
 
     def get_title(self, description: str) -> Dict[str, str | None]:
         res = {}
@@ -46,6 +51,17 @@ class DescriptionLoader:
             res[lang] = desc
 
         return res
+
+    def get_paths(self, description: str) -> List[Path]:
+        langs = self.descriptions[description].keys()
+        return [self.root_dir / description / (l + '.txt') for l in langs]
+
+    def get_last_modification_date(self, description: str) -> datetime:
+        print('last mod date:', description)
+        return max([datetime.fromtimestamp(p.stat().st_mtime, tz=local_tz) for p in self.get_paths(description)])
+
+    def get_sorted_descriptions(self) -> Dict[str, Dict[str, str]]:
+        return dict(sorted(self.descriptions.items(), key=lambda i: self.get_last_modification_date(i[0]), reverse=True))
 
     def list_descriptions(self) -> List[str]:
         return list(self.descriptions.keys())
