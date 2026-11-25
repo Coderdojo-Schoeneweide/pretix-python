@@ -1,5 +1,5 @@
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from typing import Dict, Optional, Any, List, Tuple
 from zoneinfo import ZoneInfo
 # noinspection unused-imports
@@ -33,15 +33,9 @@ class Event:
         self.name = name
         self.slug = slug
         self.live = live
-        if isinstance(date_from, str):
-            self.date_from = datetime.fromisoformat(date_from)
-        else:
-            self.date_from = date_from
+        self.date_from = datetime.fromisoformat(date_from) if isinstance(date_from, str) else date_from
 
-        if isinstance(date_to, str):
-            self.date_to = datetime.fromisoformat(date_to)
-        else:
-            self.date_to = date_to
+        self.date_to = datetime.fromisoformat(date_to) if isinstance(date_to, str) else date_to
 
         self.public_url = public_url
         self.location = location or {}
@@ -75,10 +69,7 @@ class SubEvent:
         self.event = event
         self.active = active
         self.is_public = is_public
-        if isinstance(date_from, str):
-            self.date_from = datetime.fromisoformat(date_from)
-        else:
-            self.date_from = date_from
+        self.date_from = datetime.fromisoformat(date_from) if isinstance(date_from, str) else date_from
 
         if isinstance(date_to, str):
             self.date_to = datetime.fromisoformat(date_to)
@@ -339,6 +330,7 @@ def prompt_subevents(
     elif choice == 1:
         subevents = prompt_recurring_subevents(default_name, start_index=start_index)
     else:
+        # type: ignore[unreachable-code]
         print('cancelled')
         sys.exit(0)
 

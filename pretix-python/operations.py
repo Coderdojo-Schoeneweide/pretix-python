@@ -3,7 +3,7 @@ import re
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Optional, Any, Dict
+from typing import List, Optional, Any
 
 from simple_term_menu import TerminalMenu
 

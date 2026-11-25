@@ -22,7 +22,7 @@ def convert_dtype(data: Dict[str, Any], converter: Dict[str, Callable[[Any], Any
     return {k: _convert_if_match(k, v, converter) for k, v in data.items()}
 
 
-def get_from_lang(data: Dict[str, str], lang: Lang, default_lang: Optional[Lang]) -> str:
+def get_from_lang(data: Dict[str, str], lang: Optional[Lang], default_lang: Optional[Lang]) -> str:
     lang = lang or default_lang
     lang = lang or Lang.EN  # set english as fallback
 
