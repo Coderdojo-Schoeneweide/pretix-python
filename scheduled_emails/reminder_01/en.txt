@@ -7,6 +7,7 @@ thank you for registering your protégé(s) for our workshop "{{event}}". Here a
 - **When:** {event_time}
 - **Where:** {{event_location}}
 {devices}
+- You don't need to print your ticket.
 
 **Girls welcome:** We promote equality in computer science. If you know girls who might be interested in participating in CoderDojo, feel free to invite them and book another ticket for them. It doesn't hurt to try it out!
 

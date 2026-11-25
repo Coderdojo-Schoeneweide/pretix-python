@@ -7,6 +7,7 @@ danke, dass du deine/n Schützling/e für unseren Workshop "{{event}}" angemelde
 - **Wann:** {event_time}
 - **Wo:** {{event_location}}
 {devices}
+- Ihr braucht das Ticket nicht ausdrucken.
 
 **Mädchen willkommen:** Wir fördern Gleichstellung in der Informatik. Falls ihr Mädchen kennt, die sich für die Teilnahme am CoderDojo interessieren könnten, ladet sie gern ein und bucht noch ein Ticket für sie. Ausprobieren schadet nicht!
 
