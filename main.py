@@ -13,7 +13,7 @@ from operations import (
     choose_event,
     change_description,
     change_location,
-    shred_past_events,
+    shred_past_events, change_email_rules,
 )
 from utils import choice_to_int
 
@@ -27,9 +27,11 @@ def main():
         'Add Sub-events to Series',
         'Change Description',
         'Change Location',
+        'Update Email Rules',
         'Shred Past Events',
         'Cancel'
     ]
+
     menu = TerminalMenu(options, title='What do you want to do?', clear_menu_on_exit=False)
     choice = choice_to_int(menu.show())
 
@@ -52,8 +54,11 @@ def main():
         change_location(client, event)
     elif choice == 5:
         client = create_client()
+        event = choose_event(client)
+        change_email_rules(client, event)
+    elif choice == 6:
+        client = create_client()
         shred_past_events(client)
-
 
 
 def create_client() -> Client:
@@ -63,5 +68,3 @@ def create_client() -> Client:
 
 if __name__ == '__main__':
     main()
-
-

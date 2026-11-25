@@ -10,8 +10,9 @@ from urllib.parse import urljoin
 from dotenv import load_dotenv
 import requests
 
+from descriptions import split_title
 from events import Event, NewEventInfo, SubEvent, NewSubEventInfo
-from lang import Lang
+from lang import Lang, for_multilang
 from products import Product
 
 DEFAULT_DOMAIN = 'https://pretix.eu/'
@@ -318,3 +319,99 @@ class Client:
     def set_event_live(self, event: Event | str, live: bool):
         event = event.slug if isinstance(event, Event) else event
         return self._patch(f'/api/v1/organizers/{self.organizer}/events/{event}/', {'live': live})
+
+    def remove_scheduled_emails(self, event: Event):
+        """
+        Remove all scheduled email rules for an event.
+        
+        Args:
+            event: Event object or event slug
+            
+        Returns:
+            List of deleted rule IDs
+        """
+        event_slug = event.slug if isinstance(event, Event) else event
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/sendmail_rules/'
+        
+        # Get all rules first
+        rules = self._get(endpoint)
+        
+        deleted_ids = []
+        if isinstance(rules, list):
+            for rule in rules:
+                rule_id = rule.get('id')
+                if rule_id:
+                    delete_endpoint = f'{endpoint}{rule_id}/'
+                    url = urljoin(self.pretix_domain, delete_endpoint)
+                    if self.read_only:
+                        print(f'dry delete {url}')
+                    else:
+                        r = requests.delete(url, headers=self._get_headers())
+                        r.raise_for_status()
+                    deleted_ids.append(rule_id)
+        elif isinstance(rules, dict) and 'results' in rules and isinstance(rules['results'], list):
+            # Handle paginated results
+            for rule in rules['results']:
+                rule_id = rule.get('id')
+                if rule_id:
+                    delete_endpoint = f'{endpoint}{rule_id}/'
+                    url = urljoin(self.pretix_domain, delete_endpoint)
+                    if self.read_only:
+                        print(f'dry delete {url}')
+                    else:
+                        r = requests.delete(url, headers=self._get_headers())
+                        r.raise_for_status()
+                    deleted_ids.append(rule_id)
+        
+        return deleted_ids
+
+    def get_scheduled_emails(self, event: Event):
+        """
+        Get all scheduled email rules for an event.
+        
+        Args:
+            event: Event object or event slug
+            
+        Returns:
+            List of scheduled email rules
+        """
+        event_slug = event.slug if isinstance(event, Event) else event
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/sendmail_rules/'
+        return self._get(endpoint)
+
+    def add_scheduled_email(self, event: Event, reminder_date: datetime, reminder_body: Dict[str, str]):
+        """
+        Add a new scheduled email rule for an event.
+        
+        Args:
+            event: Event object or event slug
+            reminder_date: datetime when the email should be sent
+            reminder_body: Dictionary containing email subject and template
+            
+        Returns:
+            Created rule data
+        """
+        event_slug = event.slug if isinstance(event, Event) else event
+
+        title_and_desc = for_multilang(reminder_body, split_title)
+        email_subject = {lang: title for lang, (title, _) in title_and_desc.items()}
+        email_body = {lang: desc for lang, (_, desc) in title_and_desc.items()}
+
+        # Prepare the data for the email rule
+        data = {
+            "enabled": True,
+            "subject": email_subject,
+            "template": email_body,
+            "all_products": True,
+            "limit_products": [],
+            "restrict_to_status": ["p", "n__valid_if_pending"],
+            "checked_in_status": None,
+            "send_date": reminder_date.isoformat(),
+            "date_is_absolute": True,
+            "send_to": "orders"
+        }
+        
+        endpoint = f'/api/v1/organizers/{self.organizer}/events/{event_slug}/sendmail_rules/'
+        status_code, response_data = self._post(endpoint, data)
+        
+        return response_data

@@ -1,0 +1,20 @@
+# Follow-Up: {event}
+
+Hello {name_given_name}!
+
+Thank you that you participated in our workshop "{event}". We really enjoyed seeing so many creative projects.
+
+We would be grateful for your **feedback** or wishes for future events:
+https://docs.google.com/forms/d/e/1FAIpQLSf8JmtEjubMTXxHqOe-vTe118Fh0bXdJLkLAO-Ir9Nn_9HiDg/viewform 
+
+**What's next?**
+
+We already plan the next awesome workshops, so stay tuned! :) We post any news on social media or via an email newsletter. If you want to receive our newsletter, please send an email to hallo@coderdojo-schoeneweide.de.
+Hopefully we'll meet you at our future workshops. You're also welcome to tell friends about us or to invite them to join our next workshop.
+
+Best wishes!
+
+Your CoderDojo Team
+
+
+*Instagram: https://www.instagram.com/dojosw/*	*Facebook: https://www.facebook.com/coderdojoschoeneweide*	*Coderdojo Website: https://coderdojo-schoeneweide.de*

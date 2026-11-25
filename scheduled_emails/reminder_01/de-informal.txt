@@ -1,0 +1,18 @@
+# Reminder: {{event}}
+
+Hallo {{name_given_name}},
+
+danke, dass du deine/n Schützling/e für unseren Workshop "{{event}}" angemeldet habt. Hier nochmal die wichtigsten Infos.
+
+- **Wann:** {event_time}
+- **Wo:** {{event_location}}
+{devices}
+
+**Mädchen willkommen:** Wir fördern Gleichstellung in der Informatik. Falls ihr Mädchen kennt, die sich für die Teilnahme am CoderDojo interessieren könnten, ladet sie gern ein und bucht noch ein Ticket für sie. Ausprobieren schadet nicht!
+
+**Kontakt:** Am Tag des Workshops unterstützt euch {{meta_ansprechperson_name}}. Ihr erreicht {{meta_ansprechperson_name}} telefonisch unter {{meta_ansprechperson_telefon}}.
+
+**Ihr könnt doch nicht kommen?** Storniere deine Tickets, damit jemand anderes noch eines buchen kann: {{url_cancel}}
+
+Wir freuen uns auf euch,
+euer CoderDojo Team

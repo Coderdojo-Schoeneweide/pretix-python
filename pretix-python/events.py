@@ -42,6 +42,8 @@ class Event:
         self.has_subevents = has_subevents
         self.default_lang = default_lang
 
+        self.devices: None | Tuple[str, ...] = None
+
     def __repr__(self):
         df = self.date_from.isoformat() if self.date_from else 'None'
         dt = self.date_to.isoformat() if self.date_to else 'None'

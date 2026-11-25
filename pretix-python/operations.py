@@ -9,7 +9,7 @@ from simple_term_menu import TerminalMenu
 
 from client import Client
 from descriptions import DescriptionLoader, split_title, ensure_title
-from devices import update_devices
+from devices import update_devices, choose_devices, get_devices_text
 from events import (
     Event, NewEventInfo, SubEvent, NewSubEventInfo, NewEventSeriesInfo,
     make_subevent_name, prompt_subevents
@@ -96,7 +96,8 @@ def change_description(client: Client, event: Event):
     description = description_loader.descriptions[options[entry_select]]
 
     # add necessary devices for workshop to description
-    updated_desc = update_devices(description)
+    device_choice = event.devices or choose_devices()
+    updated_desc = update_devices(description, device_choice)
 
     title_and_desc = for_multilang(updated_desc, split_title)
     title = {lang: title for lang, (title, _) in title_and_desc.items()}
@@ -118,6 +119,44 @@ def change_location(client: Client, event: Event):
         sys.exit(1)
     location = locations[choices[choice]]
     client.update_event_location(event, location)
+
+
+def change_email_rules(client: Client, event: Event):
+    email_dir = Path('scheduled_emails')
+    if not email_dir.is_dir():
+        return
+    loader = DescriptionLoader.from_dir(email_dir)
+    reminder_body = loader.descriptions['reminder_01']
+    followup_body = loader.descriptions['followup_01']
+
+    device_choice = event.devices or choose_devices()
+    devices_text = get_devices_text(list(device_choice))
+
+    def _format_timerange(start: datetime, end: datetime, lang: str) -> str:
+        if lang.startswith("en"):
+            if start.date() == end.date():
+                return f"{start:%b %d, %Y, %I:%M %p} - {end:%I:%M %p}"
+            return f"{start:%b %d, %Y, %I:%M %p} - {end:%b %d, %Y, %I:%M %p}"
+
+        if lang.startswith("de"):
+            if start.date() == end.date():
+                return f"{start:%d.%m.%Y, %H:%M} - {end:%H:%M} Uhr"
+            return f"{start:%d.%m.%Y, %H:%M} Uhr - {end:%d.%m.%Y, %H:%M} Uhr"
+
+        raise ValueError(f"Unsupported language: {lang}")
+
+    def _format_devices(s, lang):
+        return s.format(devices=devices_text[lang], event_time=_format_timerange(event.date_from, event.date_to, lang))
+
+    reminder_body = {lang: _format_devices(value, lang) for lang, value in reminder_body.items()}
+
+    client.remove_scheduled_emails(event)
+
+    reminder_date = (event.date_from - timedelta(days=3)).replace(hour=17)
+    client.add_scheduled_email(event, reminder_date, reminder_body)
+
+    followup_date = (event.date_from + timedelta(days=1))
+    client.add_scheduled_email(event, followup_date, followup_body)
 
 
 def update_latecomer_avail_date(client: Client, event: Event, workshop_date: datetime):
@@ -143,6 +182,8 @@ def create_new_event(client: Client):
 
     # change available date from latecomer tickets
     update_latecomer_avail_date(client, event, info.date_from)
+
+    change_email_rules(client, event)
 
 
 def clean_quota_name(name: str) -> str:
@@ -399,7 +440,8 @@ def shred_past_events(client: Client):
     cursor = 0
     while True:
         shown = past_events[:num_shown]
-        options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr") if e.date_from else "No date", e.slug) for e in shown]
+        options = ['{} {}'.format(e.date_from.strftime("%a. %d.%m.%Y, %H:%M Uhr") if e.date_from else "No date", e.slug)
+                   for e in shown]
         has_more = num_shown < len(past_events)
         if has_more:
             options.append('[+] load older events')

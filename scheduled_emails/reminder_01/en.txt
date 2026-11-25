@@ -1,0 +1,18 @@
+# Reminder: {{event}}
+
+Hello {{name_given_name}},
+
+thank you for registering your protégé(s) for our workshop "{{event}}". Here again the most important info.
+
+- **When:** {event_time}
+- **Where:** {{event_location}}
+{devices}
+
+**Girls welcome:** We promote equality in computer science. If you know girls who might be interested in participating in CoderDojo, feel free to invite them and book another ticket for them. It doesn't hurt to try it out!
+
+**Contact:** On the day of the workshop {{meta_ansprechperson_name}} will support you. You can reach {{meta_ansprechperson_name}} by phone at {{meta_ansprechperson_telefon}}.
+
+**Can't make it?** Please cancel your ticket to make space for others: {{url_cancel}}
+
+We are looking forward to seeing you,
+your CoderDojo Team

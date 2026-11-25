@@ -1,0 +1,21 @@
+# Follow-Up: {event}
+
+Hallo {name_given_name}!
+
+Danke dass ihr bzw. eure Schützlinge heute bei unserem Workshop "{event}" dabei wart. Wir fanden den Workshop ganz zauberhaft.
+
+Wir würden uns über euer **Feedback** oder Wünsche für die Zukunft sehr freuen:
+https://docs.google.com/forms/d/e/1FAIpQLSf8JmtEjubMTXxHqOe-vTe118Fh0bXdJLkLAO-Ir9Nn_9HiDg/viewform 
+
+**Wie geht's weiter?**
+
+Wir planen schon fleißig weitere Workshops! Seid gespannt :) Unsere News posten wir auf Social Media, oder schicken sie euch per Newsletter. Falls ihr euch für den Newsletter anmelden wollt, schickt uns kurz eine Email an: hallo@coderdojo-schoeneweide.de.
+
+Wir freuen uns wenn ihr bei einem unserer zukünftigen Workshops auch wieder dabei seid. Erzählt gern weiter, dass es uns gibt, damit wir mehr Kindern und Jugendlichen Informatik näher bringen können!
+
+Liebe Grüße,
+
+Euer CoderDojo Team
+
+
+*Instagram: https://www.instagram.com/dojosw/*	*Facebook: https://www.facebook.com/coderdojoschoeneweide*	*Coderdojo Website: https://coderdojo-schoeneweide.de*

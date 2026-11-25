@@ -1,15 +1,12 @@
 import sys
-from typing import Dict, Iterable
+from typing import Dict, Iterable, Tuple
 
 from simple_term_menu import TerminalMenu
 
 from utils import choice_to_entries, has_format_placeholder
 
 
-def update_devices(description: Dict[str, str]) -> Dict[str, str]:
-    if not contains_fstring(description):
-        return description
-
+def choose_devices() -> Tuple[str, ...]:
     options = ["Laptop", "Tablet", "Smartphone"]
     menu = TerminalMenu(
         options,
@@ -20,7 +17,15 @@ def update_devices(description: Dict[str, str]) -> Dict[str, str]:
     if entry_select == len(options) - 1:
         print('cancelled')
         sys.exit(0)
-    updated_desc = set_devices(choice_to_entries(menu), description)
+
+    return choice_to_entries(menu)
+
+
+def update_devices(description: Dict[str, str], device_choice: Tuple[str, ...]) -> Dict[str, str]:
+    if not contains_fstring(description):
+        return description
+
+    updated_desc = set_devices(device_choice, description)
     return updated_desc
 
 
@@ -58,3 +63,24 @@ def set_devices(device_list: Iterable[str], description: Dict[str, str]) -> Dict
 
     return updated_description
 
+
+def get_devices_text(device_list: Iterable[str]) -> Dict[str, str]:
+    if not device_list:
+        return ''
+
+    updated_description = {}
+
+    # Text that is going to be added based on the devices
+    if list(device_list) == ['Laptop']:
+        de_text = "- **Das brauchst du:** Einen Laptop zum Programmieren. Falls du keinen hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
+        en_text = "- **What to bring:** A laptop for programming. If you don't have one, book an additional computer product or write to us. We'll find a solution!"
+    else:
+        de_text = "- **Das brauchst du:** Ein Gerät zum Programmieren (" + ", ".join(
+            device_list) + "). Falls du keins hast, buche ein Computer-Zusatzprodukt oder schreib uns. Wir finden eine Lösung!"
+        en_text = "- **What to bring:** A device for programming (" + ", ".join(
+            device_list) + "). If you don't have one, book an additional computer product or write to us. We'll find a solution!"
+
+    return {
+        'de-informal': de_text,
+        'en': en_text
+    }
