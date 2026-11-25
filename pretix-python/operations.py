@@ -3,7 +3,7 @@ import re
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Optional, Any
+from typing import Dict, List, Optional, Any
 
 from simple_term_menu import TerminalMenu
 
@@ -48,6 +48,41 @@ def choose_event(
     return last_n_events[entry_select]
 
 
+def choose_suffixes() -> List[Dict[str, str]]:
+    """Ask the user which description suffixes to append. All are selected by default."""
+    suffix_dir = Path('description_suffixes')
+    if not suffix_dir.is_dir():
+        return []
+    loader = DescriptionLoader.from_dir(suffix_dir)
+    names = sorted(loader.descriptions.keys())
+    if not names:
+        return []
+    menu = TerminalMenu(
+        names,
+        title='Choose suffixes to append (space: toggle, enter: confirm)',
+        multi_select=True,
+        show_multi_select_hint=True,
+        multi_select_empty_ok=True,
+        preselected_entries=list(range(len(names))),
+        clear_menu_on_exit=False,
+    )
+    selected = menu.show()
+    if selected is None:
+        return []
+    if isinstance(selected, int):
+        selected = (selected,)
+    return [loader.descriptions[names[i]] for i in selected]
+
+
+def append_suffixes(desc: Dict[str, str], suffixes: List[Dict[str, str]]) -> Dict[str, str]:
+    result = dict(desc)
+    for suffix in suffixes:
+        for lang, text in suffix.items():
+            if lang in result and text.strip():
+                result[lang] = result[lang].rstrip() + '\r\n\r\n' + text.strip()
+    return result
+
+
 def change_description(client: Client, event: Event):
     description_loader = DescriptionLoader.from_dir()
     options = list(description_loader.get_sorted_descriptions().keys())
@@ -66,6 +101,7 @@ def change_description(client: Client, event: Event):
     title_and_desc = for_multilang(updated_desc, split_title)
     title = {lang: title for lang, (title, _) in title_and_desc.items()}
     desc = {lang: desc for lang, (_, desc) in title_and_desc.items()}
+    desc = append_suffixes(desc, choose_suffixes())
     client.patch_event_settings(event, {'frontpage_text': desc})
     if any(title.values()):
         client.update_event_title(event, ensure_title(title))
